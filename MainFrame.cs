@@ -18,28 +18,45 @@ namespace ms_word_writer
             InitializeComponent();
         }
 
-        // открыть файл
+        // открывает файл
         private void openFileButton_Click(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() != DialogResult.OK) return;
 
             filename = openFileDialog.SafeFileName;
             filepath = openFileDialog.FileName;
-            contextBox.Text = filename;
+            contentTextBox.Text = filename + "\n";
+        }
+
+        // записывает в таблицу
+        private void writeButton_Click(object sender, EventArgs e)
+        {
+
+            if (filename == null || filename == null || filename == "" || filename == "")
+            {
+                return;
+            }
 
             // запись в таблицу
             using (var document = DocX.Load(filepath))
             {
-                var table = document.Tables[0];
+                try
+                {
+                    var table = document.Tables[0];
 
-                // вставка пустой строки
-                var row = table.InsertRow();
-                row.Cells[0].Paragraphs[0].Append("1");
-                row.Cells[1].Paragraphs[0].Append("2");
-                document.Save();
+                    // вставка пустой строки
+                    var row = table.InsertRow();
+                    row.Cells[0].Paragraphs[0].Append(numberField.Text);
+                    row.Cells[1].Paragraphs[0].Append(dateField.Text);
+                    document.Save();
+                    contentTextBox.Text += $"Записано: {numberLabel.Text} = {numberField.Text}, {dateLabel.Text} = {dateField.Text}\n";
+                } catch(Exception exc)
+                {
+                    contentTextBox.Text += $"{exc}";
+                }
 
             }
-
         }
+        
     }
 }
