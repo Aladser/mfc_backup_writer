@@ -30,29 +30,27 @@
         {
             this.openFileButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.numberLabel = new System.Windows.Forms.Label();
             this.dateLabel = new System.Windows.Forms.Label();
-            this.numberField = new System.Windows.Forms.TextBox();
             this.dateField = new System.Windows.Forms.TextBox();
             this.writeButton = new System.Windows.Forms.Button();
             this.contentTextBox = new System.Windows.Forms.RichTextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.copyContentLabel = new System.Windows.Forms.Label();
+            this.copySizeLabel = new System.Windows.Forms.Label();
+            this.storageNumberLabel = new System.Windows.Forms.Label();
+            this.storagePlaceLabel = new System.Windows.Forms.Label();
+            this.personLabel = new System.Windows.Forms.Label();
+            this.signatureLabel = new System.Windows.Forms.Label();
+            this.copySizeField = new System.Windows.Forms.TextBox();
+            this.copyContentField = new System.Windows.Forms.TextBox();
+            this.storageNumberField = new System.Windows.Forms.TextBox();
+            this.storagePlaceField = new System.Windows.Forms.TextBox();
+            this.personField = new System.Windows.Forms.TextBox();
+            this.signatureField = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // openFileButton
             // 
-            this.openFileButton.Location = new System.Drawing.Point(21, 472);
+            this.openFileButton.Location = new System.Drawing.Point(12, 451);
             this.openFileButton.Name = "openFileButton";
             this.openFileButton.Size = new System.Drawing.Size(106, 36);
             this.openFileButton.TabIndex = 1;
@@ -64,43 +62,26 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
-            // numberLabel
-            // 
-            this.numberLabel.Location = new System.Drawing.Point(18, 19);
-            this.numberLabel.Name = "numberLabel";
-            this.numberLabel.Size = new System.Drawing.Size(431, 23);
-            this.numberLabel.TabIndex = 2;
-            this.numberLabel.Text = "№ п/п";
-            this.numberLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // dateLabel
             // 
-            this.dateLabel.Location = new System.Drawing.Point(18, 72);
+            this.dateLabel.Location = new System.Drawing.Point(18, 32);
             this.dateLabel.Name = "dateLabel";
             this.dateLabel.Size = new System.Drawing.Size(431, 23);
             this.dateLabel.TabIndex = 3;
             this.dateLabel.Text = "Дата создания резервной";
             this.dateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // numberField
-            // 
-            this.numberField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.numberField.Location = new System.Drawing.Point(473, 12);
-            this.numberField.Name = "numberField";
-            this.numberField.Size = new System.Drawing.Size(303, 30);
-            this.numberField.TabIndex = 4;
-            // 
             // dateField
             // 
             this.dateField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateField.Location = new System.Drawing.Point(473, 65);
+            this.dateField.Location = new System.Drawing.Point(473, 32);
             this.dateField.Name = "dateField";
             this.dateField.Size = new System.Drawing.Size(303, 30);
-            this.dateField.TabIndex = 6;
+            this.dateField.TabIndex = 2;
             // 
             // writeButton
             // 
-            this.writeButton.Location = new System.Drawing.Point(145, 472);
+            this.writeButton.Location = new System.Drawing.Point(145, 451);
             this.writeButton.Name = "writeButton";
             this.writeButton.Size = new System.Drawing.Size(99, 36);
             this.writeButton.TabIndex = 7;
@@ -112,130 +93,128 @@
             // 
             this.contentTextBox.Location = new System.Drawing.Point(793, 12);
             this.contentTextBox.Name = "contentTextBox";
-            this.contentTextBox.Size = new System.Drawing.Size(333, 433);
+            this.contentTextBox.Size = new System.Drawing.Size(333, 419);
             this.contentTextBox.TabIndex = 8;
             this.contentTextBox.Text = "";
             // 
-            // label1
+            // copyContentLabel
             // 
-            this.label1.Location = new System.Drawing.Point(18, 135);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(431, 16);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Содержание резервной копии";
+            this.copyContentLabel.Location = new System.Drawing.Point(18, 99);
+            this.copyContentLabel.Name = "copyContentLabel";
+            this.copyContentLabel.Size = new System.Drawing.Size(431, 16);
+            this.copyContentLabel.TabIndex = 9;
+            this.copyContentLabel.Text = "Содержание резервной копии";
             // 
-            // label2
+            // copySizeLabel
             // 
-            this.label2.Location = new System.Drawing.Point(18, 186);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(431, 23);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Размер резервной копии (Мб)";
+            this.copySizeLabel.Location = new System.Drawing.Point(18, 157);
+            this.copySizeLabel.Name = "copySizeLabel";
+            this.copySizeLabel.Size = new System.Drawing.Size(431, 23);
+            this.copySizeLabel.TabIndex = 10;
+            this.copySizeLabel.Text = "Размер резервной копии (Мб)";
             // 
-            // label3
+            // storageNumberLabel
             // 
-            this.label3.Location = new System.Drawing.Point(18, 247);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(431, 16);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "Учетный номер носителя";
+            this.storageNumberLabel.Location = new System.Drawing.Point(18, 223);
+            this.storageNumberLabel.Name = "storageNumberLabel";
+            this.storageNumberLabel.Size = new System.Drawing.Size(431, 16);
+            this.storageNumberLabel.TabIndex = 11;
+            this.storageNumberLabel.Text = "Учетный номер носителя";
             // 
-            // label4
+            // storagePlaceLabel
             // 
-            this.label4.Location = new System.Drawing.Point(12, 306);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(437, 16);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Место хранения носителя";
+            this.storagePlaceLabel.Location = new System.Drawing.Point(18, 286);
+            this.storagePlaceLabel.Name = "storagePlaceLabel";
+            this.storagePlaceLabel.Size = new System.Drawing.Size(437, 16);
+            this.storagePlaceLabel.TabIndex = 12;
+            this.storagePlaceLabel.Text = "Место хранения носителя";
             // 
-            // label5
+            // personLabel
             // 
-            this.label5.Location = new System.Drawing.Point(12, 366);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(437, 23);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "ФИО, должность лица, осуществившего резервное копирование";
+            this.personLabel.Location = new System.Drawing.Point(18, 348);
+            this.personLabel.Name = "personLabel";
+            this.personLabel.Size = new System.Drawing.Size(437, 23);
+            this.personLabel.TabIndex = 13;
+            this.personLabel.Text = "ФИО, должность лица, осуществившего резервное копирование";
             // 
-            // label6
+            // signatureLabel
             // 
-            this.label6.Location = new System.Drawing.Point(12, 422);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(437, 23);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Подпись должностного лица, осуществившего резервное копирование";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.signatureLabel.Location = new System.Drawing.Point(18, 408);
+            this.signatureLabel.Name = "signatureLabel";
+            this.signatureLabel.Size = new System.Drawing.Size(437, 23);
+            this.signatureLabel.TabIndex = 14;
+            this.signatureLabel.Text = "Подпись должностного лица, осуществившего резервное копирование";
+            this.signatureLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // textBox1
+            // copySizeField
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(473, 176);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(303, 30);
-            this.textBox1.TabIndex = 15;
+            this.copySizeField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.copySizeField.Location = new System.Drawing.Point(473, 147);
+            this.copySizeField.Name = "copySizeField";
+            this.copySizeField.Size = new System.Drawing.Size(303, 30);
+            this.copySizeField.TabIndex = 4;
             // 
-            // textBox2
+            // copyContentField
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox2.Location = new System.Drawing.Point(473, 125);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(303, 30);
-            this.textBox2.TabIndex = 17;
+            this.copyContentField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.copyContentField.Location = new System.Drawing.Point(473, 89);
+            this.copyContentField.Name = "copyContentField";
+            this.copyContentField.Size = new System.Drawing.Size(303, 30);
+            this.copyContentField.TabIndex = 3;
             // 
-            // textBox3
+            // storageNumberField
             // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox3.Location = new System.Drawing.Point(473, 237);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(303, 30);
-            this.textBox3.TabIndex = 19;
+            this.storageNumberField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.storageNumberField.Location = new System.Drawing.Point(473, 213);
+            this.storageNumberField.Name = "storageNumberField";
+            this.storageNumberField.Size = new System.Drawing.Size(303, 30);
+            this.storageNumberField.TabIndex = 5;
             // 
-            // textBox4
+            // storagePlaceField
             // 
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox4.Location = new System.Drawing.Point(473, 296);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(303, 30);
-            this.textBox4.TabIndex = 21;
+            this.storagePlaceField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.storagePlaceField.Location = new System.Drawing.Point(473, 276);
+            this.storagePlaceField.Name = "storagePlaceField";
+            this.storagePlaceField.Size = new System.Drawing.Size(303, 30);
+            this.storagePlaceField.TabIndex = 6;
             // 
-            // textBox5
+            // personField
             // 
-            this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox5.Location = new System.Drawing.Point(473, 356);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(303, 30);
-            this.textBox5.TabIndex = 23;
+            this.personField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.personField.Location = new System.Drawing.Point(473, 338);
+            this.personField.Name = "personField";
+            this.personField.Size = new System.Drawing.Size(303, 30);
+            this.personField.TabIndex = 7;
             // 
-            // textBox6
+            // signatureField
             // 
-            this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox6.Location = new System.Drawing.Point(473, 415);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(303, 30);
-            this.textBox6.TabIndex = 25;
+            this.signatureField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.signatureField.Location = new System.Drawing.Point(473, 401);
+            this.signatureField.Name = "signatureField";
+            this.signatureField.Size = new System.Drawing.Size(303, 30);
+            this.signatureField.TabIndex = 8;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1138, 520);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(1138, 512);
+            this.Controls.Add(this.signatureField);
+            this.Controls.Add(this.personField);
+            this.Controls.Add(this.storagePlaceField);
+            this.Controls.Add(this.storageNumberField);
+            this.Controls.Add(this.copyContentField);
+            this.Controls.Add(this.copySizeField);
+            this.Controls.Add(this.signatureLabel);
+            this.Controls.Add(this.personLabel);
+            this.Controls.Add(this.storagePlaceLabel);
+            this.Controls.Add(this.storageNumberLabel);
+            this.Controls.Add(this.copySizeLabel);
+            this.Controls.Add(this.copyContentLabel);
             this.Controls.Add(this.contentTextBox);
             this.Controls.Add(this.writeButton);
             this.Controls.Add(this.dateField);
-            this.Controls.Add(this.numberField);
             this.Controls.Add(this.dateLabel);
-            this.Controls.Add(this.numberLabel);
             this.Controls.Add(this.openFileButton);
             this.Name = "MainForm";
             this.Text = "Запись бэкапов в DOCX-файл";
@@ -247,24 +226,22 @@
         #endregion
         private System.Windows.Forms.Button openFileButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private System.Windows.Forms.Label numberLabel;
         private System.Windows.Forms.Label dateLabel;
-        private System.Windows.Forms.TextBox numberField;
         private System.Windows.Forms.TextBox dateField;
         private System.Windows.Forms.Button writeButton;
         private System.Windows.Forms.RichTextBox contentTextBox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Label copyContentLabel;
+        private System.Windows.Forms.Label copySizeLabel;
+        private System.Windows.Forms.Label storageNumberLabel;
+        private System.Windows.Forms.Label storagePlaceLabel;
+        private System.Windows.Forms.Label personLabel;
+        private System.Windows.Forms.Label signatureLabel;
+        private System.Windows.Forms.TextBox copySizeField;
+        private System.Windows.Forms.TextBox copyContentField;
+        private System.Windows.Forms.TextBox storageNumberField;
+        private System.Windows.Forms.TextBox storagePlaceField;
+        private System.Windows.Forms.TextBox personField;
+        private System.Windows.Forms.TextBox signatureField;
     }
 }
 
