@@ -55,7 +55,6 @@ namespace ms_word_writer
         // записывает в таблицу
         private void writeButton_Click(object sender, EventArgs e)
         {
-
             if (filename == null || filename == null || filename == "" || filename == "")
             {
                 return;
@@ -64,12 +63,12 @@ namespace ms_word_writer
             string[] cellData = new string[8];
             cellData[0] = (rowCount + 1).ToString();
             cellData[1] = dateField.Value.ToString().Substring(0, 10);
-            cellData[2] = copyContentField.Text;
+            cellData[2] = copyContentField.SelectedItem.ToString();
             cellData[3] = copySizeField.Text;
-            cellData[4] = storageNumberField.Text;
-            cellData[5] = storagePlaceField.Text;
-            cellData[6] = personField.Text;
-            cellData[7] = signatureField.Text;
+            cellData[4] = storageNumberField.SelectedItem.ToString();
+            cellData[5] = storagePlaceField.SelectedItem.ToString();
+            cellData[6] = personField.SelectedItem.ToString();
+            cellData[7] = "";
 
             try
             {
