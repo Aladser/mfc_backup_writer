@@ -1,9 +1,6 @@
-﻿using Aspose.Words;
+﻿using ms_word_writer.Classes;
 using System;
-using System.ComponentModel;
-using System.Linq;
 using System.Windows.Forms;
-using Xceed.Document.NET;
 using Xceed.Words.NET;
 
 namespace ms_word_writer
@@ -12,6 +9,7 @@ namespace ms_word_writer
     {
         string filename;
         string filepath;
+        int rowCount = 0;
 
         public MainForm()
         {
@@ -25,38 +23,64 @@ namespace ms_word_writer
 
             filename = openFileDialog.SafeFileName;
             filepath = openFileDialog.FileName;
-            contentTextBox.Text = filename + "\n";
+            contentTextBox.Text = $"Файл бэкапов {filename}\n";
+
+            try
+            {
+                var document = DocX.Load(filepath);
+                int tableCount = document.Tables.Count;
+
+                if (document.Tables.Count == 0)
+                {
+                    TableCtl.Create(this, filepath);
+                    tableCount++;
+                }
+
+                foreach (var table in document.Tables)
+                {
+                    rowCount += (table.RowCount - 2);
+                }
+                contentTextBox.Text += $"Число таблиц = {tableCount}\n";
+                contentTextBox.Text += $"Число записей = {rowCount} \n";
+
+
+            }
+            catch (System.IO.IOException exc)
+            {
+                // файл открыт в другой программе
+                contentTextBox.Text = exc.Message;
+            }
         }
 
         // записывает в таблицу
         private void writeButton_Click(object sender, EventArgs e)
         {
-
             if (filename == null || filename == null || filename == "" || filename == "")
             {
+                contentTextBox.Text += "Не открыт файл\n";
                 return;
             }
 
-            // запись в таблицу
-            using (var document = DocX.Load(filepath))
+            string[] cellData = new string[8];
+            cellData[0] = (rowCount + 1).ToString();
+            cellData[1] = dateField.Value.ToString().Substring(0, 10);
+            cellData[2] = copyContentField.SelectedItem.ToString();
+            cellData[3] = copySizeField.Text;
+            cellData[4] = storageNumberField.SelectedItem.ToString();
+            cellData[5] = storagePlaceField.SelectedItem.ToString();
+            cellData[6] = personField.SelectedItem.ToString();
+            cellData[7] = "";
+
+            try
             {
-                try
-                {
-                    var table = document.Tables[0];
-
-                    // вставка пустой строки
-                    var row = table.InsertRow();
-                    row.Cells[0].Paragraphs[0].Append(numberField.Text);
-                    row.Cells[1].Paragraphs[0].Append(dateField.Text);
-                    document.Save();
-                    contentTextBox.Text += $"Записано: {numberLabel.Text} = {numberField.Text}, {dateLabel.Text} = {dateField.Text}\n";
-                } catch(Exception exc)
-                {
-                    contentTextBox.Text += $"{exc}";
-                }
-
+                TableCtl.Write(filepath, cellData);
+                contentTextBox.Text += $"{dateField.Text}: Записано\n";
+            }
+            catch (Exception exc)
+            {
+                contentTextBox.Text += $"{exc}";
             }
         }
-        
+
     }
 }
