@@ -1,9 +1,6 @@
-﻿using Aspose.Words;
+﻿using ms_word_writer.Classes;
 using System;
-using System.ComponentModel;
-using System.Linq;
 using System.Windows.Forms;
-using Xceed.Document.NET;
 using Xceed.Words.NET;
 
 namespace ms_word_writer
@@ -25,20 +22,30 @@ namespace ms_word_writer
             if (openFileDialog.ShowDialog() != DialogResult.OK) return;
 
             filename = openFileDialog.SafeFileName;
-
             filepath = openFileDialog.FileName;
             contentTextBox.Text = $"Файл бэкапов {filename}\n";
+
 
             try
             {
                 var document = DocX.Load(filepath);
-                foreach(var table in document.Tables)
+
+                /*
+                if (document.Tables.Count == 0)
                 {
-                    rowCount += table.RowCount;
+                    TableCtl.Create(this, filepath);
+                }
+                */
+                TableCtl.Create(this, filepath);
+
+                foreach (var table in document.Tables)
+                {
+                    rowCount += (table.RowCount - 2);
                 }
                 contentTextBox.Text += $"Число таблиц = {document.Tables.Count}\n";
                 contentTextBox.Text += $"Число записей = {rowCount} \n";
-            } catch (System.IO.IOException exc)
+            }
+            catch (System.IO.IOException exc)
             {
                 // файл открыт в другой программе
                 contentTextBox.Text = exc.Message;
@@ -63,7 +70,7 @@ namespace ms_word_writer
 
                     // вставка пустой строки
                     var row = table.InsertRow();
-                    row.Cells[0].Paragraphs[0].Append("№ п/п");
+                    row.Cells[0].Paragraphs[0].Append((++rowCount).ToString());
                     row.Cells[1].Paragraphs[0].Append(dateField.Text);
                     row.Cells[2].Paragraphs[0].Append(copyContentField.Text);
                     row.Cells[3].Paragraphs[0].Append(copySizeField.Text);
@@ -73,13 +80,14 @@ namespace ms_word_writer
                     row.Cells[7].Paragraphs[0].Append(signatureField.Text);
                     document.Save();
                     contentTextBox.Text += "Записано:\n";
-                } catch(Exception exc)
+                }
+                catch (Exception exc)
                 {
                     contentTextBox.Text += $"{exc}";
                 }
 
             }
         }
-        
+
     }
 }
