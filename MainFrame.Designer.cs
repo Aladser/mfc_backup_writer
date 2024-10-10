@@ -31,7 +31,6 @@
             this.openFileButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.dateLabel = new System.Windows.Forms.Label();
-            this.dateField = new System.Windows.Forms.TextBox();
             this.writeButton = new System.Windows.Forms.Button();
             this.contentTextBox = new System.Windows.Forms.RichTextBox();
             this.copyContentLabel = new System.Windows.Forms.Label();
@@ -41,11 +40,12 @@
             this.personLabel = new System.Windows.Forms.Label();
             this.signatureLabel = new System.Windows.Forms.Label();
             this.copySizeField = new System.Windows.Forms.TextBox();
-            this.copyContentField = new System.Windows.Forms.TextBox();
             this.storageNumberField = new System.Windows.Forms.TextBox();
             this.storagePlaceField = new System.Windows.Forms.TextBox();
             this.personField = new System.Windows.Forms.TextBox();
             this.signatureField = new System.Windows.Forms.TextBox();
+            this.copyContentField = new System.Windows.Forms.TextBox();
+            this.dateField = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // openFileButton
@@ -70,14 +70,6 @@
             this.dateLabel.TabIndex = 3;
             this.dateLabel.Text = "Дата создания резервной";
             this.dateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // dateField
-            // 
-            this.dateField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateField.Location = new System.Drawing.Point(473, 32);
-            this.dateField.Name = "dateField";
-            this.dateField.Size = new System.Drawing.Size(303, 30);
-            this.dateField.TabIndex = 2;
             // 
             // writeButton
             // 
@@ -154,14 +146,6 @@
             this.copySizeField.Size = new System.Drawing.Size(303, 30);
             this.copySizeField.TabIndex = 4;
             // 
-            // copyContentField
-            // 
-            this.copyContentField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.copyContentField.Location = new System.Drawing.Point(473, 89);
-            this.copyContentField.Name = "copyContentField";
-            this.copyContentField.Size = new System.Drawing.Size(303, 30);
-            this.copyContentField.TabIndex = 3;
-            // 
             // storageNumberField
             // 
             this.storageNumberField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -194,11 +178,30 @@
             this.signatureField.Size = new System.Drawing.Size(303, 30);
             this.signatureField.TabIndex = 8;
             // 
+            // copyContentField
+            // 
+            this.copyContentField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.copyContentField.Location = new System.Drawing.Point(473, 89);
+            this.copyContentField.Name = "copyContentField";
+            this.copyContentField.Size = new System.Drawing.Size(303, 30);
+            this.copyContentField.TabIndex = 3;
+            // 
+            // dateField
+            // 
+            this.dateField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dateField.Location = new System.Drawing.Point(473, 32);
+            this.dateField.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
+            this.dateField.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.dateField.Name = "dateField";
+            this.dateField.Size = new System.Drawing.Size(303, 26);
+            this.dateField.TabIndex = 2;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1138, 512);
+            this.Controls.Add(this.dateField);
             this.Controls.Add(this.signatureField);
             this.Controls.Add(this.personField);
             this.Controls.Add(this.storagePlaceField);
@@ -213,7 +216,6 @@
             this.Controls.Add(this.copyContentLabel);
             this.Controls.Add(this.contentTextBox);
             this.Controls.Add(this.writeButton);
-            this.Controls.Add(this.dateField);
             this.Controls.Add(this.dateLabel);
             this.Controls.Add(this.openFileButton);
             this.Name = "MainForm";
@@ -227,7 +229,6 @@
         private System.Windows.Forms.Button openFileButton;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Label dateLabel;
-        private System.Windows.Forms.TextBox dateField;
         private System.Windows.Forms.Button writeButton;
         private System.Windows.Forms.RichTextBox contentTextBox;
         private System.Windows.Forms.Label copyContentLabel;
@@ -237,11 +238,12 @@
         private System.Windows.Forms.Label personLabel;
         private System.Windows.Forms.Label signatureLabel;
         private System.Windows.Forms.TextBox copySizeField;
-        private System.Windows.Forms.TextBox copyContentField;
         private System.Windows.Forms.TextBox storageNumberField;
         private System.Windows.Forms.TextBox storagePlaceField;
         private System.Windows.Forms.TextBox personField;
         private System.Windows.Forms.TextBox signatureField;
+        private System.Windows.Forms.TextBox copyContentField;
+        private System.Windows.Forms.DateTimePicker dateField;
     }
 }
 

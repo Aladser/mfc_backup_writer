@@ -42,6 +42,8 @@ namespace ms_word_writer
                 }
                 contentTextBox.Text += $"Число таблиц = {tableCount}\n";
                 contentTextBox.Text += $"Число записей = {rowCount} \n";
+
+
             }
             catch (System.IO.IOException exc)
             {
@@ -61,7 +63,7 @@ namespace ms_word_writer
 
             string[] cellData = new string[8];
             cellData[0] = (rowCount + 1).ToString();
-            cellData[1] = dateField.Text;
+            cellData[1] = dateField.Value.ToString().Substring(0, 10);
             cellData[2] = copyContentField.Text;
             cellData[3] = copySizeField.Text;
             cellData[4] = storageNumberField.Text;
