@@ -156,6 +156,7 @@
             "Database 1C/Intep",
             "Database 1C",
             "Database Intep"});
+            this.copyContentField.SelectedIndex = 0;
             this.copyContentField.Location = new System.Drawing.Point(473, 93);
             this.copyContentField.Name = "copyContentField";
             this.copyContentField.Size = new System.Drawing.Size(423, 30);
@@ -169,6 +170,7 @@
             this.storageNumberField.Items.AddRange(new object[] {
             "NA9NLF36",
             "WXF1CC1C8000"});
+            this.storageNumberField.SelectedIndex = 0;
             this.storageNumberField.Location = new System.Drawing.Point(473, 209);
             this.storageNumberField.Name = "storageNumberField";
             this.storageNumberField.Size = new System.Drawing.Size(423, 30);
@@ -183,6 +185,7 @@
             "Серверная 50 лет Октября 4/2",
             "Кабинет 101",
             "Кабинет 105"});
+            this.storagePlaceField.SelectedIndex = 0;
             this.storagePlaceField.Location = new System.Drawing.Point(473, 272);
             this.storagePlaceField.Name = "storagePlaceField";
             this.storagePlaceField.Size = new System.Drawing.Size(423, 30);
@@ -199,6 +202,7 @@
             "Хлобыстов И.В., .ведущий программист",
             "Андрущенко А.В., ведущий программист",
             "Гаманец В.Г., начальник отдела"});
+            this.personField.SelectedIndex = 0;
             this.personField.Location = new System.Drawing.Point(473, 333);
             this.personField.Name = "personField";
             this.personField.Size = new System.Drawing.Size(423, 33);

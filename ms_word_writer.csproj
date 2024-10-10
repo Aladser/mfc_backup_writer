@@ -100,6 +100,7 @@
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\MainForm.datasource" />
+    <None Include="Properties\DataSources\ms_word_writer.Classes.TableCtl.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
