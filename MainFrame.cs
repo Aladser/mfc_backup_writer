@@ -55,22 +55,33 @@ namespace ms_word_writer
         // записывает в таблицу
         private void writeButton_Click(object sender, EventArgs e)
         {
+            /*
             if (filename == null || filename == null || filename == "" || filename == "")
             {
                 contentTextBox.Text += "Не открыт файл\n";
                 return;
             }
+            */
 
             string[] cellData = new string[8];
-            cellData[0] = (rowCount + 1).ToString();
-            cellData[1] = dateField.Value.ToString().Substring(0, 10);
-            cellData[2] = copyContentField.SelectedItem.ToString();
+            //cellData[0] = (rowCount + 1).ToString();
+            //cellData[1] = dateField.Value.ToString().Substring(0, 10);
+            //cellData[2] = copyContentField.SelectedItem.ToString();
             cellData[3] = copySizeField.Text;
-            cellData[4] = storageNumberField.SelectedItem.ToString();
-            cellData[5] = storagePlaceField.SelectedItem.ToString();
-            cellData[6] = personField.SelectedItem.ToString();
-            cellData[7] = "";
+            //cellData[4] = storageNumberField.SelectedItem.ToString();
+            //cellData[5] = storagePlaceField.SelectedItem.ToString();
+            //cellData[6] = personField.SelectedItem.ToString();
+            //cellData[7] = "";
 
+            Console.WriteLine(cellData[3].Contains("+"));
+            if(double.TryParse(cellData[3], out double number)) {
+                Console.WriteLine(number);
+            } else
+            {
+                Console.WriteLine("Значение размера резервной копии не является числом");
+            }
+            
+            /*
             try
             {
                 TableCtl.Write(filepath, cellData);
@@ -80,6 +91,7 @@ namespace ms_word_writer
             {
                 contentTextBox.Text += $"{exc}";
             }
+            */
         }
 
     }
