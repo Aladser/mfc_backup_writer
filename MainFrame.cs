@@ -57,6 +57,7 @@ namespace ms_word_writer
         {
             if (filename == null || filename == null || filename == "" || filename == "")
             {
+                contentTextBox.Text += "Не открыт файл\n";
                 return;
             }
 
