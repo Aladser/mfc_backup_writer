@@ -4,46 +4,74 @@ using Xceed.Words.NET;
 
 namespace ms_word_writer.Classes
 {
+    /// <summary>
+    /// Управляет записью данных в таблицу MS Word
+    /// </summary>
     public static class TableCtl
     {
-        // создание таблицы
+        /// <summary>
+        /// Создает таблицу
+        /// </summary>
         public static Table Create(Form form, string filepath)
         {
             var document = DocX.Load(filepath);
             var table = document.AddTable(2, 8);
 
-            float[] widths = { 60, 250, 250, 250, 250, 250, 250, 250 };
+            float[] widths = { 80, 400, 400, 400, 400, 400, 400, 400 };
             table.SetWidths(widths, true);
-
-
-            table.Rows[0].Cells[0].Paragraphs[0].Append("№ п/п");
-            table.Rows[0].Cells[1].Paragraphs[0].Append("Дата создания резервной\r\nкопии\r\n");
-            table.Rows[0].Cells[2].Paragraphs[0].Append("Содержание резервной копии");
-            table.Rows[0].Cells[3].Paragraphs[0].Append("Размер\r\nрезервной\r\nкопии\r\n(Мб)\r\n");
-            table.Rows[0].Cells[4].Paragraphs[0].Append("Учетный номер\r\nносителя\r\n");
-            table.Rows[0].Cells[5].Paragraphs[0].Append("Место хранения\r\nносителя\r\n");
-            table.Rows[0].Cells[6].Paragraphs[0].Append("ФИО, должность лица,\r\nосуществившего резервное копирование\r\n");
-            table.Rows[0].Cells[7].Paragraphs[0].Append("Подпись должностного лица, осуществившего резервное копирование");
-
-            table.Rows[1].Cells[0].Paragraphs[0].Append("1");
-            table.Rows[1].Cells[1].Paragraphs[0].Append("2");
-            table.Rows[1].Cells[2].Paragraphs[0].Append("3");
-            table.Rows[1].Cells[3].Paragraphs[0].Append("4");
-            table.Rows[1].Cells[4].Paragraphs[0].Append("5");
-            table.Rows[1].Cells[5].Paragraphs[0].Append("6");
-            table.Rows[1].Cells[6].Paragraphs[0].Append("7");
-            table.Rows[1].Cells[7].Paragraphs[0].Append("8");
-
-
-            table.Alignment = Alignment.center;
+            // выравнивание в документе
+            //table.Alignment = Alignment.center;
+            // оступы
             table.SetTableCellMargin(TableCellMarginType.top, 10);
             table.SetTableCellMargin(TableCellMarginType.bottom, 10);
             table.SetTableCellMargin(TableCellMarginType.left, 5);
             table.SetTableCellMargin(TableCellMarginType.right, 5);
 
+            // заголовки таблицы
+            string[] headerArr = {
+                "№ п/п",
+                "Дата создания резервной\r\nкопии\r\n",
+                "Содержание резервной копии",
+                "Размер\r\nрезервной\r\nкопии\r\n(Мб)\r\n",
+                "Учетный номер\r\nносителя\r\n",
+                "Место хранения\r\nносителя\r\n",
+                "ФИО, должность лица,\r\nосуществившего резервное копирование\r\n",
+                "Подпись должностного лица, осуществившего резервное копирование"
+            };
+            for (int i = 0; i < headerArr.Length; i++)
+            {
+                table.Rows[0].Cells[i].Paragraphs[0].Append(headerArr[i]);
+                table.Rows[0].Cells[i].Paragraphs[0].Alignment = Alignment.center;
+                table.Rows[0].Cells[i].Paragraphs[0].FontSize(12).Bold();
+                table.Rows[1].Cells[i].Paragraphs[0].Append((i + 1).ToString());
+                table.Rows[1].Cells[i].Paragraphs[0].Alignment = Alignment.center;
+                table.Rows[1].Cells[i].Paragraphs[0].FontSize(12);
+            }
+
             document.InsertTable(table);
             document.Save();
             return table;
+        }
+
+        /// <summary>
+        /// Записывает строку в таблицу
+        /// <param name="filepath"></param>
+        /// <param name="data"></param>
+        /// </summary>
+        public static void Write(string filepath, string[] data)
+        {
+            using (var document = DocX.Load(filepath))
+            {
+                var table = document.Tables[document.Tables.Count - 1];
+                var row = table.InsertRow();
+                for (int i = 0; i < data.Length; i++)
+                {
+                    row.Cells[i].Paragraphs[0].Append(data[i]);
+                    row.Cells[i].Paragraphs[0].Alignment = Alignment.center;
+                    row.Cells[i].Paragraphs[0].FontSize(12);
+                }
+                document.Save();
+            }
         }
     }
 }

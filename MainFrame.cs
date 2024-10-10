@@ -25,24 +25,22 @@ namespace ms_word_writer
             filepath = openFileDialog.FileName;
             contentTextBox.Text = $"Файл бэкапов {filename}\n";
 
-
             try
             {
                 var document = DocX.Load(filepath);
+                int tableCount = document.Tables.Count;
 
-                /*
                 if (document.Tables.Count == 0)
                 {
                     TableCtl.Create(this, filepath);
+                    tableCount++;
                 }
-                */
-                TableCtl.Create(this, filepath);
 
                 foreach (var table in document.Tables)
                 {
                     rowCount += (table.RowCount - 2);
                 }
-                contentTextBox.Text += $"Число таблиц = {document.Tables.Count}\n";
+                contentTextBox.Text += $"Число таблиц = {tableCount}\n";
                 contentTextBox.Text += $"Число записей = {rowCount} \n";
             }
             catch (System.IO.IOException exc)
@@ -61,31 +59,24 @@ namespace ms_word_writer
                 return;
             }
 
-            // запись в таблицу
-            using (var document = DocX.Load(filepath))
+            string[] cellData = new string[8];
+            cellData[0] = (rowCount + 1).ToString();
+            cellData[1] = dateField.Text;
+            cellData[2] = copyContentField.Text;
+            cellData[3] = copySizeField.Text;
+            cellData[4] = storageNumberField.Text;
+            cellData[5] = storagePlaceField.Text;
+            cellData[6] = personField.Text;
+            cellData[7] = signatureField.Text;
+
+            try
             {
-                try
-                {
-                    var table = document.Tables[0];
-
-                    // вставка пустой строки
-                    var row = table.InsertRow();
-                    row.Cells[0].Paragraphs[0].Append((++rowCount).ToString());
-                    row.Cells[1].Paragraphs[0].Append(dateField.Text);
-                    row.Cells[2].Paragraphs[0].Append(copyContentField.Text);
-                    row.Cells[3].Paragraphs[0].Append(copySizeField.Text);
-                    row.Cells[4].Paragraphs[0].Append(storageNumberField.Text);
-                    row.Cells[5].Paragraphs[0].Append(storagePlaceField.Text);
-                    row.Cells[6].Paragraphs[0].Append(personField.Text);
-                    row.Cells[7].Paragraphs[0].Append(signatureField.Text);
-                    document.Save();
-                    contentTextBox.Text += "Записано:\n";
-                }
-                catch (Exception exc)
-                {
-                    contentTextBox.Text += $"{exc}";
-                }
-
+                TableCtl.Write(filepath, cellData);
+                contentTextBox.Text += $"{dateField.Text}: Записано\n";
+            }
+            catch (Exception exc)
+            {
+                contentTextBox.Text += $"{exc}";
             }
         }
 
