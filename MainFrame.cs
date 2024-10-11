@@ -1,5 +1,6 @@
 ﻿using ms_word_writer.Classes;
 using System;
+using System.Configuration;
 using System.Windows.Forms;
 using Xceed.Document.NET;
 using Xceed.Words.NET;
@@ -11,8 +12,8 @@ namespace ms_word_writer
         string filename;
         string filepath;
         int lastRecordNumber = 0;
-        const string STORAGE_NUMBER = "NA9NLF36";
-        const string STORAGE_PLACE = "Серверная 50 лет Октября 4/2";
+        string STORAGE_NUMBER = ConfigurationManager.AppSettings.Get("STORAGE_NUMBER");
+        string STORAGE_PLACE = ConfigurationManager.AppSettings.Get("STORAGE_PLACE");
         // this.copyContentField.SelectedIndex = 0;
 
         public MainForm()
