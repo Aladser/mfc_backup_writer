@@ -51,12 +51,6 @@
     <StartupObject>ms_word_writer.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Aspose.Words, Version=24.10.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>packages\Aspose.Words.24.10.0\lib\net462\Aspose.Words.dll</HintPath>
-    </Reference>
-    <Reference Include="Aspose.Words.Pdf2Word, Version=24.10.0.0, Culture=neutral, PublicKeyToken=716fcc553a201e56, processorArchitecture=MSIL">
-      <HintPath>packages\Aspose.Words.24.10.0\lib\net462\Aspose.Words.Pdf2Word.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

@@ -35,14 +35,10 @@
             this.contentTextBox = new System.Windows.Forms.RichTextBox();
             this.copyContentLabel = new System.Windows.Forms.Label();
             this.copySizeLabel = new System.Windows.Forms.Label();
-            this.storageNumberLabel = new System.Windows.Forms.Label();
-            this.storagePlaceLabel = new System.Windows.Forms.Label();
             this.personLabel = new System.Windows.Forms.Label();
             this.copySizeField = new System.Windows.Forms.TextBox();
             this.dateField = new System.Windows.Forms.DateTimePicker();
             this.copyContentField = new System.Windows.Forms.ComboBox();
-            this.storageNumberField = new System.Windows.Forms.ComboBox();
-            this.storagePlaceField = new System.Windows.Forms.ComboBox();
             this.personField = new System.Windows.Forms.ComboBox();
             this.backupNameLabel = new System.Windows.Forms.Label();
             this.backupNameField = new System.Windows.Forms.Label();
@@ -50,7 +46,7 @@
             // 
             // openFileButton
             // 
-            this.openFileButton.Location = new System.Drawing.Point(21, 473);
+            this.openFileButton.Location = new System.Drawing.Point(21, 355);
             this.openFileButton.Name = "openFileButton";
             this.openFileButton.Size = new System.Drawing.Size(106, 36);
             this.openFileButton.TabIndex = 1;
@@ -66,15 +62,15 @@
             // 
             this.dateLabel.Location = new System.Drawing.Point(18, 32);
             this.dateLabel.Name = "dateLabel";
-            this.dateLabel.Size = new System.Drawing.Size(284, 23);
+            this.dateLabel.Size = new System.Drawing.Size(284, 26);
             this.dateLabel.TabIndex = 3;
-            this.dateLabel.Text = "Дата создания резервной";
+            this.dateLabel.Text = "Дата создания резервной копии";
             this.dateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // writeButton
             // 
             this.writeButton.Enabled = false;
-            this.writeButton.Location = new System.Drawing.Point(133, 473);
+            this.writeButton.Location = new System.Drawing.Point(150, 355);
             this.writeButton.Name = "writeButton";
             this.writeButton.Size = new System.Drawing.Size(99, 36);
             this.writeButton.TabIndex = 7;
@@ -84,9 +80,10 @@
             // 
             // contentTextBox
             // 
-            this.contentTextBox.Location = new System.Drawing.Point(771, 32);
+            this.contentTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.contentTextBox.Location = new System.Drawing.Point(755, 32);
             this.contentTextBox.Name = "contentTextBox";
-            this.contentTextBox.Size = new System.Drawing.Size(473, 477);
+            this.contentTextBox.Size = new System.Drawing.Size(489, 359);
             this.contentTextBox.TabIndex = 8;
             this.contentTextBox.Text = "";
             // 
@@ -106,25 +103,9 @@
             this.copySizeLabel.TabIndex = 10;
             this.copySizeLabel.Text = "Размер резервной копии (Гб)";
             // 
-            // storageNumberLabel
-            // 
-            this.storageNumberLabel.Location = new System.Drawing.Point(18, 217);
-            this.storageNumberLabel.Name = "storageNumberLabel";
-            this.storageNumberLabel.Size = new System.Drawing.Size(284, 16);
-            this.storageNumberLabel.TabIndex = 11;
-            this.storageNumberLabel.Text = "Учетный номер носителя";
-            // 
-            // storagePlaceLabel
-            // 
-            this.storagePlaceLabel.Location = new System.Drawing.Point(18, 280);
-            this.storagePlaceLabel.Name = "storagePlaceLabel";
-            this.storagePlaceLabel.Size = new System.Drawing.Size(284, 16);
-            this.storagePlaceLabel.TabIndex = 12;
-            this.storagePlaceLabel.Text = "Место хранения носителя";
-            // 
             // personLabel
             // 
-            this.personLabel.Location = new System.Drawing.Point(18, 343);
+            this.personLabel.Location = new System.Drawing.Point(18, 208);
             this.personLabel.Name = "personLabel";
             this.personLabel.Size = new System.Drawing.Size(284, 38);
             this.personLabel.TabIndex = 13;
@@ -133,71 +114,39 @@
             // copySizeField
             // 
             this.copySizeField.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.copySizeField.Location = new System.Drawing.Point(326, 149);
+            this.copySizeField.Location = new System.Drawing.Point(308, 149);
             this.copySizeField.Name = "copySizeField";
             this.copySizeField.Size = new System.Drawing.Size(423, 28);
             this.copySizeField.TabIndex = 4;
             // 
             // dateField
             // 
-            this.dateField.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateField.Location = new System.Drawing.Point(326, 32);
+            this.dateField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dateField.Location = new System.Drawing.Point(308, 32);
             this.dateField.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
             this.dateField.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.dateField.Name = "dateField";
-            this.dateField.Size = new System.Drawing.Size(423, 28);
+            this.dateField.Size = new System.Drawing.Size(423, 26);
             this.dateField.TabIndex = 2;
             // 
             // copyContentField
             // 
             this.copyContentField.DisplayMember = "0";
             this.copyContentField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.copyContentField.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.copyContentField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.copyContentField.FormattingEnabled = true;
             this.copyContentField.Items.AddRange(new object[] {
             "Database MFC",
-            "Database 1C/Intep",
-            "Database 1C",
-            "Database Intep"});
-            this.copyContentField.SelectedIndex = 0;
-            this.copyContentField.Location = new System.Drawing.Point(326, 91);
+            "Database 1C/Intep"});
+            this.copyContentField.Location = new System.Drawing.Point(308, 93);
             this.copyContentField.Name = "copyContentField";
-            this.copyContentField.Size = new System.Drawing.Size(423, 30);
+            this.copyContentField.Size = new System.Drawing.Size(423, 28);
             this.copyContentField.TabIndex = 15;
-            // 
-            // storageNumberField
-            // 
-            this.storageNumberField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.storageNumberField.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.storageNumberField.FormattingEnabled = true;
-            this.storageNumberField.Items.AddRange(new object[] {
-            "NA9NLF36",
-            "WXF1CC1C8000"});
-            this.storageNumberField.SelectedIndex = 0;
-            this.storageNumberField.Location = new System.Drawing.Point(326, 209);
-            this.storageNumberField.Name = "storageNumberField";
-            this.storageNumberField.Size = new System.Drawing.Size(423, 30);
-            this.storageNumberField.TabIndex = 16;
-            // 
-            // storagePlaceField
-            // 
-            this.storagePlaceField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.storagePlaceField.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.storagePlaceField.FormattingEnabled = true;
-            this.storagePlaceField.Items.AddRange(new object[] {
-            "Серверная 50 лет Октября 4/2",
-            "Кабинет 101",
-            "Кабинет 105"});
-            this.storagePlaceField.SelectedIndex = 0;
-            this.storagePlaceField.Location = new System.Drawing.Point(326, 272);
-            this.storagePlaceField.Name = "storagePlaceField";
-            this.storagePlaceField.Size = new System.Drawing.Size(423, 30);
-            this.storagePlaceField.TabIndex = 17;
             // 
             // personField
             // 
             this.personField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.personField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.personField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.personField.FormattingEnabled = true;
             this.personField.Items.AddRange(new object[] {
             "Авраменко А.С., инженер-программист",
@@ -205,16 +154,15 @@
             "Хлобыстов И.В., .ведущий программист",
             "Андрущенко А.В., ведущий программист",
             "Гаманец В.Г., начальник отдела"});
-            this.personField.SelectedIndex = 0;
-            this.personField.Location = new System.Drawing.Point(326, 333);
+            this.personField.Location = new System.Drawing.Point(308, 208);
             this.personField.Name = "personField";
-            this.personField.Size = new System.Drawing.Size(423, 33);
+            this.personField.Size = new System.Drawing.Size(423, 28);
             this.personField.TabIndex = 18;
             // 
             // backupNameLabel
             // 
             this.backupNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.backupNameLabel.Location = new System.Drawing.Point(18, 406);
+            this.backupNameLabel.Location = new System.Drawing.Point(17, 284);
             this.backupNameLabel.Name = "backupNameLabel";
             this.backupNameLabel.Size = new System.Drawing.Size(284, 23);
             this.backupNameLabel.TabIndex = 19;
@@ -223,27 +171,23 @@
             // backupNameField
             // 
             this.backupNameField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.backupNameField.Location = new System.Drawing.Point(18, 429);
+            this.backupNameField.Location = new System.Drawing.Point(17, 307);
             this.backupNameField.Name = "backupNameField";
-            this.backupNameField.Size = new System.Drawing.Size(731, 27);
+            this.backupNameField.Size = new System.Drawing.Size(714, 27);
             this.backupNameField.TabIndex = 20;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1267, 531);
+            this.ClientSize = new System.Drawing.Size(1267, 413);
             this.Controls.Add(this.backupNameField);
             this.Controls.Add(this.backupNameLabel);
             this.Controls.Add(this.personField);
-            this.Controls.Add(this.storagePlaceField);
-            this.Controls.Add(this.storageNumberField);
             this.Controls.Add(this.copyContentField);
             this.Controls.Add(this.dateField);
             this.Controls.Add(this.copySizeField);
             this.Controls.Add(this.personLabel);
-            this.Controls.Add(this.storagePlaceLabel);
-            this.Controls.Add(this.storageNumberLabel);
             this.Controls.Add(this.copySizeLabel);
             this.Controls.Add(this.copyContentLabel);
             this.Controls.Add(this.contentTextBox);
@@ -265,14 +209,10 @@
         private System.Windows.Forms.RichTextBox contentTextBox;
         private System.Windows.Forms.Label copyContentLabel;
         private System.Windows.Forms.Label copySizeLabel;
-        private System.Windows.Forms.Label storageNumberLabel;
-        private System.Windows.Forms.Label storagePlaceLabel;
         private System.Windows.Forms.Label personLabel;
         private System.Windows.Forms.TextBox copySizeField;
         private System.Windows.Forms.DateTimePicker dateField;
         private System.Windows.Forms.ComboBox copyContentField;
-        private System.Windows.Forms.ComboBox storageNumberField;
-        private System.Windows.Forms.ComboBox storagePlaceField;
         private System.Windows.Forms.ComboBox personField;
         private System.Windows.Forms.Label backupNameLabel;
         private System.Windows.Forms.Label backupNameField;
