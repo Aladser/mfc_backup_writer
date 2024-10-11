@@ -35,9 +35,9 @@
             this.copyContentLabel = new System.Windows.Forms.Label();
             this.copySizeLabel = new System.Windows.Forms.Label();
             this.workerLabel = new System.Windows.Forms.Label();
-            this.copySizeField = new System.Windows.Forms.TextBox();
+            this.backupSizeField = new System.Windows.Forms.TextBox();
             this.dateField = new System.Windows.Forms.DateTimePicker();
-            this.copyContentField = new System.Windows.Forms.ComboBox();
+            this.backupContentField = new System.Windows.Forms.ComboBox();
             this.workerField = new System.Windows.Forms.ComboBox();
             this.backupNameLabel = new System.Windows.Forms.Label();
             this.backupNameField = new System.Windows.Forms.Label();
@@ -102,13 +102,13 @@
             this.workerLabel.TabIndex = 13;
             this.workerLabel.Text = "ФИО, должность лица, осуществившего резервное копирование";
             // 
-            // copySizeField
+            // backupSizeField
             // 
-            this.copySizeField.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.copySizeField.Location = new System.Drawing.Point(308, 149);
-            this.copySizeField.Name = "copySizeField";
-            this.copySizeField.Size = new System.Drawing.Size(423, 28);
-            this.copySizeField.TabIndex = 4;
+            this.backupSizeField.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.backupSizeField.Location = new System.Drawing.Point(308, 149);
+            this.backupSizeField.Name = "backupSizeField";
+            this.backupSizeField.Size = new System.Drawing.Size(423, 28);
+            this.backupSizeField.TabIndex = 4;
             // 
             // dateField
             // 
@@ -120,19 +120,20 @@
             this.dateField.Size = new System.Drawing.Size(423, 26);
             this.dateField.TabIndex = 2;
             // 
-            // copyContentField
+            // backupContentField
             // 
-            this.copyContentField.DisplayMember = "0";
-            this.copyContentField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.copyContentField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.copyContentField.FormattingEnabled = true;
-            this.copyContentField.Items.AddRange(new object[] {
+            this.backupContentField.DisplayMember = "0";
+            this.backupContentField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.backupContentField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.backupContentField.FormattingEnabled = true;
+            this.backupContentField.Items.AddRange(new object[] {
             "Database MFC",
             "Database 1C/Intep"});
-            this.copyContentField.Location = new System.Drawing.Point(308, 93);
-            this.copyContentField.Name = "copyContentField";
-            this.copyContentField.Size = new System.Drawing.Size(423, 28);
-            this.copyContentField.TabIndex = 15;
+            this.backupContentField.SelectedIndex = 0;
+            this.backupContentField.Location = new System.Drawing.Point(308, 93);
+            this.backupContentField.Name = "backupContentField";
+            this.backupContentField.Size = new System.Drawing.Size(423, 28);
+            this.backupContentField.TabIndex = 15;
             // 
             // workerField
             // 
@@ -145,6 +146,7 @@
             "Хлобыстов И.В., .ведущий программист",
             "Андрущенко А.В., ведущий программист",
             "Гаманец В.Г., начальник отдела"});
+            this.workerField.SelectedIndex = 0;
             this.workerField.Location = new System.Drawing.Point(308, 208);
             this.workerField.Name = "workerField";
             this.workerField.Size = new System.Drawing.Size(423, 28);
@@ -186,9 +188,9 @@
             this.Controls.Add(this.backupNameField);
             this.Controls.Add(this.backupNameLabel);
             this.Controls.Add(this.workerField);
-            this.Controls.Add(this.copyContentField);
+            this.Controls.Add(this.backupContentField);
             this.Controls.Add(this.dateField);
-            this.Controls.Add(this.copySizeField);
+            this.Controls.Add(this.backupSizeField);
             this.Controls.Add(this.workerLabel);
             this.Controls.Add(this.copySizeLabel);
             this.Controls.Add(this.copyContentLabel);
@@ -211,9 +213,9 @@
         private System.Windows.Forms.Label copyContentLabel;
         private System.Windows.Forms.Label copySizeLabel;
         private System.Windows.Forms.Label workerLabel;
-        private System.Windows.Forms.TextBox copySizeField;
+        private System.Windows.Forms.TextBox backupSizeField;
         private System.Windows.Forms.DateTimePicker dateField;
-        private System.Windows.Forms.ComboBox copyContentField;
+        private System.Windows.Forms.ComboBox backupContentField;
         private System.Windows.Forms.ComboBox workerField;
         private System.Windows.Forms.Label backupNameLabel;
         private System.Windows.Forms.Label backupNameField;

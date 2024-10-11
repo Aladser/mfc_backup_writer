@@ -56,35 +56,35 @@ namespace ms_word_writer
         private void WriteButton_Click(object sender, EventArgs e)
         {
             // получаем значение размера бэкапа
-            double copySize;
-            copySizeField.Text = copySizeField.Text.Replace('.', ',');
-            if (copySizeField.Text.Contains("+"))
+            double backupSize;
+            backupSizeField.Text = backupSizeField.Text.Replace('.', ',');
+            if (backupSizeField.Text.Contains("+"))
             {
                 // сумма чисел
 
-                string[] copySizeArr = copySizeField.Text.Split('+');
+                string[] backupSizeArr = backupSizeField.Text.Split('+');
                 // убираются пробелы
-                for (int i = 0; i < copySizeArr.Length; i++)
+                for (int i = 0; i < backupSizeArr.Length; i++)
                 {
-                    copySizeArr[i] = copySizeArr[i].Trim();
+                    backupSizeArr[i] = backupSizeArr[i].Trim();
                 }
 
                 // парсинг суммы чисел
-                if (!double.TryParse(copySizeArr[0], out double firstValue) || !double.TryParse(copySizeArr[1], out double secondValue))
+                if (!double.TryParse(backupSizeArr[0], out double firstValue) || !double.TryParse(backupSizeArr[1], out double secondValue))
                 {
                     contentField.Text += "Одно из значений суммы резервных копий не является числом. Выражение должно быть вида Число1 + Число 2\n";
                     return;
                 }
                 else
                 {
-                    copySize = firstValue + secondValue;
+                    backupSize = firstValue + secondValue;
                 }
             }
             else
             {
                 // одно число
 
-                if (!double.TryParse(copySizeField.Text, out copySize))
+                if (!double.TryParse(backupSizeField.Text, out backupSize))
                 {
                     contentField.Text += "Значение размера резервной копии не является числом\n";
                     return;
@@ -94,8 +94,8 @@ namespace ms_word_writer
             string[] cellData = new string[8];
             cellData[0] = (++lastRecordNumber).ToString();
             cellData[1] = dateField.Value.ToString().Substring(0, 10);
-            cellData[2] = copyContentField.SelectedItem.ToString();
-            cellData[3] = ((int)(copySize * 1024)).ToString();
+            cellData[2] = backupContentField.SelectedItem.ToString();
+            cellData[3] = ((int)(backupSize * 1024)).ToString();
             cellData[4] = Program.STORAGE_NUMBER;
             cellData[5] = Program.STORAGE_PLACE;
             cellData[6] = workerField.SelectedItem.ToString();
