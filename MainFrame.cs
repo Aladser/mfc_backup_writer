@@ -24,7 +24,6 @@ namespace ms_word_writer
         private void OpenFileButton_Click(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() != DialogResult.OK) return;
-
             filename = openFileDialog.SafeFileName;
             filepath = openFileDialog.FileName;
 
@@ -45,6 +44,7 @@ namespace ms_word_writer
                     int.TryParse(row.Cells[0].Paragraphs[0].Text, out lastRecordNumber);
                     backupNameField.Text = $"{filename}: таблиц = {tableCount}, последняя запись №{lastRecordNumber}";
                     writeButton.Enabled = true;
+                    contentTextBox.Text = "";
                 }
             }
             catch (Exception exc)
