@@ -32,7 +32,6 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.dateLabel = new System.Windows.Forms.Label();
             this.writeButton = new System.Windows.Forms.Button();
-            this.contentTextBox = new System.Windows.Forms.RichTextBox();
             this.copyContentLabel = new System.Windows.Forms.Label();
             this.copySizeLabel = new System.Windows.Forms.Label();
             this.workerLabel = new System.Windows.Forms.Label();
@@ -42,6 +41,7 @@
             this.workerField = new System.Windows.Forms.ComboBox();
             this.backupNameLabel = new System.Windows.Forms.Label();
             this.backupNameField = new System.Windows.Forms.Label();
+            this.contentField = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // openFileButton
@@ -77,15 +77,6 @@
             this.writeButton.Text = "Записать";
             this.writeButton.UseVisualStyleBackColor = true;
             this.writeButton.Click += new System.EventHandler(this.WriteButton_Click);
-            // 
-            // contentTextBox
-            // 
-            this.contentTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.contentTextBox.Location = new System.Drawing.Point(755, 32);
-            this.contentTextBox.Name = "contentTextBox";
-            this.contentTextBox.Size = new System.Drawing.Size(489, 359);
-            this.contentTextBox.TabIndex = 8;
-            this.contentTextBox.Text = "";
             // 
             // copyContentLabel
             // 
@@ -176,6 +167,17 @@
             this.backupNameField.Size = new System.Drawing.Size(714, 27);
             this.backupNameField.TabIndex = 20;
             // 
+            // contentField
+            // 
+            this.contentField.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.contentField.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.contentField.Location = new System.Drawing.Point(755, 32);
+            this.contentField.Name = "contentField";
+            this.contentField.ReadOnly = true;
+            this.contentField.Size = new System.Drawing.Size(489, 359);
+            this.contentField.TabIndex = 8;
+            this.contentField.Text = "";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -190,7 +192,7 @@
             this.Controls.Add(this.workerLabel);
             this.Controls.Add(this.copySizeLabel);
             this.Controls.Add(this.copyContentLabel);
-            this.Controls.Add(this.contentTextBox);
+            this.Controls.Add(this.contentField);
             this.Controls.Add(this.writeButton);
             this.Controls.Add(this.dateLabel);
             this.Controls.Add(this.openFileButton);
@@ -206,7 +208,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Label dateLabel;
         private System.Windows.Forms.Button writeButton;
-        private System.Windows.Forms.RichTextBox contentTextBox;
         private System.Windows.Forms.Label copyContentLabel;
         private System.Windows.Forms.Label copySizeLabel;
         private System.Windows.Forms.Label workerLabel;
@@ -216,6 +217,7 @@
         private System.Windows.Forms.ComboBox workerField;
         private System.Windows.Forms.Label backupNameLabel;
         private System.Windows.Forms.Label backupNameField;
+        private System.Windows.Forms.RichTextBox contentField;
     }
 }
 

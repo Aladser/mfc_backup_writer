@@ -43,12 +43,12 @@ namespace ms_word_writer
                     int.TryParse(row.Cells[0].Paragraphs[0].Text, out lastRecordNumber);
                     backupNameField.Text = $"{filename}: таблиц = {tableCount}, последняя запись №{lastRecordNumber}";
                     writeButton.Enabled = true;
-                    contentTextBox.Text = "";
+                    contentField.Text = "";
                 }
             }
             catch (Exception exc)
             {
-                contentTextBox.Text = exc.Message;
+                contentField.Text = exc.Message;
             }
         }
 
@@ -72,7 +72,7 @@ namespace ms_word_writer
                 // парсинг суммы чисел
                 if (!double.TryParse(copySizeArr[0], out double firstValue) || !double.TryParse(copySizeArr[1], out double secondValue))
                 {
-                    contentTextBox.Text += "Одно из значений суммы резервных копий не является числом. Выражение должно быть вида Число1 + Число 2\n";
+                    contentField.Text += "Одно из значений суммы резервных копий не является числом. Выражение должно быть вида Число1 + Число 2\n";
                     return;
                 }
                 else
@@ -86,7 +86,7 @@ namespace ms_word_writer
 
                 if (!double.TryParse(copySizeField.Text, out copySize))
                 {
-                    contentTextBox.Text += "Значение размера резервной копии не является числом\n";
+                    contentField.Text += "Значение размера резервной копии не является числом\n";
                     return;
                 }
             }
@@ -104,11 +104,11 @@ namespace ms_word_writer
             try
             {
                 TableCtl.Write(filepath, cellData);
-                contentTextBox.Text += $"{dateField.Text}: записано\n";
+                contentField.Text += $"{dateField.Text}: записано\n";
             }
             catch (Exception exc)
             {
-                contentTextBox.Text += exc.Message;
+                contentField.Text += exc.Message;
             }
         }
     }
