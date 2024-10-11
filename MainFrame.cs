@@ -40,6 +40,7 @@ namespace ms_word_writer
                     rowCount += (table.RowCount - 2);
                 }
                 backupNameField.Text = $"{filename}: таблиц = {tableCount}, записей = {rowCount}";
+                writeButton.Enabled = true;
             }
             catch (System.IO.IOException exc)
             {

@@ -73,6 +73,7 @@
             // 
             // writeButton
             // 
+            this.writeButton.Enabled = false;
             this.writeButton.Location = new System.Drawing.Point(133, 473);
             this.writeButton.Name = "writeButton";
             this.writeButton.Size = new System.Drawing.Size(99, 36);
