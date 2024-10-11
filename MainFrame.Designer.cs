@@ -28,20 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.openFileButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.dateLabel = new System.Windows.Forms.Label();
             this.writeButton = new System.Windows.Forms.Button();
-            this.contentTextBox = new System.Windows.Forms.RichTextBox();
             this.copyContentLabel = new System.Windows.Forms.Label();
             this.copySizeLabel = new System.Windows.Forms.Label();
             this.workerLabel = new System.Windows.Forms.Label();
-            this.copySizeField = new System.Windows.Forms.TextBox();
+            this.backupSizeField = new System.Windows.Forms.TextBox();
             this.dateField = new System.Windows.Forms.DateTimePicker();
-            this.copyContentField = new System.Windows.Forms.ComboBox();
+            this.backupContentField = new System.Windows.Forms.ComboBox();
             this.workerField = new System.Windows.Forms.ComboBox();
             this.backupNameLabel = new System.Windows.Forms.Label();
             this.backupNameField = new System.Windows.Forms.Label();
+            this.contentField = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // openFileButton
@@ -78,15 +79,6 @@
             this.writeButton.UseVisualStyleBackColor = true;
             this.writeButton.Click += new System.EventHandler(this.WriteButton_Click);
             // 
-            // contentTextBox
-            // 
-            this.contentTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.contentTextBox.Location = new System.Drawing.Point(755, 32);
-            this.contentTextBox.Name = "contentTextBox";
-            this.contentTextBox.Size = new System.Drawing.Size(489, 359);
-            this.contentTextBox.TabIndex = 8;
-            this.contentTextBox.Text = "";
-            // 
             // copyContentLabel
             // 
             this.copyContentLabel.Location = new System.Drawing.Point(18, 99);
@@ -111,13 +103,13 @@
             this.workerLabel.TabIndex = 13;
             this.workerLabel.Text = "ФИО, должность лица, осуществившего резервное копирование";
             // 
-            // copySizeField
+            // backupSizeField
             // 
-            this.copySizeField.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.copySizeField.Location = new System.Drawing.Point(308, 149);
-            this.copySizeField.Name = "copySizeField";
-            this.copySizeField.Size = new System.Drawing.Size(423, 28);
-            this.copySizeField.TabIndex = 4;
+            this.backupSizeField.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.backupSizeField.Location = new System.Drawing.Point(308, 149);
+            this.backupSizeField.Name = "backupSizeField";
+            this.backupSizeField.Size = new System.Drawing.Size(423, 28);
+            this.backupSizeField.TabIndex = 4;
             // 
             // dateField
             // 
@@ -129,19 +121,19 @@
             this.dateField.Size = new System.Drawing.Size(423, 26);
             this.dateField.TabIndex = 2;
             // 
-            // copyContentField
+            // backupContentField
             // 
-            this.copyContentField.DisplayMember = "0";
-            this.copyContentField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.copyContentField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.copyContentField.FormattingEnabled = true;
-            this.copyContentField.Items.AddRange(new object[] {
+            this.backupContentField.DisplayMember = "0";
+            this.backupContentField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.backupContentField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.backupContentField.FormattingEnabled = true;
+            this.backupContentField.Items.AddRange(new object[] {
             "Database MFC",
             "Database 1C/Intep"});
-            this.copyContentField.Location = new System.Drawing.Point(308, 93);
-            this.copyContentField.Name = "copyContentField";
-            this.copyContentField.Size = new System.Drawing.Size(423, 28);
-            this.copyContentField.TabIndex = 15;
+            this.backupContentField.Location = new System.Drawing.Point(308, 93);
+            this.backupContentField.Name = "backupContentField";
+            this.backupContentField.Size = new System.Drawing.Size(423, 28);
+            this.backupContentField.TabIndex = 15;
             // 
             // workerField
             // 
@@ -176,6 +168,17 @@
             this.backupNameField.Size = new System.Drawing.Size(714, 27);
             this.backupNameField.TabIndex = 20;
             // 
+            // contentField
+            // 
+            this.contentField.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.contentField.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.contentField.Location = new System.Drawing.Point(755, 32);
+            this.contentField.Name = "contentField";
+            this.contentField.ReadOnly = true;
+            this.contentField.Size = new System.Drawing.Size(489, 359);
+            this.contentField.TabIndex = 8;
+            this.contentField.Text = "";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -184,16 +187,17 @@
             this.Controls.Add(this.backupNameField);
             this.Controls.Add(this.backupNameLabel);
             this.Controls.Add(this.workerField);
-            this.Controls.Add(this.copyContentField);
+            this.Controls.Add(this.backupContentField);
             this.Controls.Add(this.dateField);
-            this.Controls.Add(this.copySizeField);
+            this.Controls.Add(this.backupSizeField);
             this.Controls.Add(this.workerLabel);
             this.Controls.Add(this.copySizeLabel);
             this.Controls.Add(this.copyContentLabel);
-            this.Controls.Add(this.contentTextBox);
+            this.Controls.Add(this.contentField);
             this.Controls.Add(this.writeButton);
             this.Controls.Add(this.dateLabel);
             this.Controls.Add(this.openFileButton);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Запись бэкапов в DOCX-файл";
             this.ResumeLayout(false);
@@ -206,16 +210,16 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Label dateLabel;
         private System.Windows.Forms.Button writeButton;
-        private System.Windows.Forms.RichTextBox contentTextBox;
         private System.Windows.Forms.Label copyContentLabel;
         private System.Windows.Forms.Label copySizeLabel;
         private System.Windows.Forms.Label workerLabel;
-        private System.Windows.Forms.TextBox copySizeField;
+        private System.Windows.Forms.TextBox backupSizeField;
         private System.Windows.Forms.DateTimePicker dateField;
-        private System.Windows.Forms.ComboBox copyContentField;
+        private System.Windows.Forms.ComboBox backupContentField;
         private System.Windows.Forms.ComboBox workerField;
         private System.Windows.Forms.Label backupNameLabel;
         private System.Windows.Forms.Label backupNameField;
+        private System.Windows.Forms.RichTextBox contentField;
     }
 }
 

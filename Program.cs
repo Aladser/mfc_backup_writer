@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Windows.Forms;
 
@@ -7,25 +9,28 @@ namespace ms_word_writer
     internal static class Program
     {
         // номер носителя
-        public static string STORAGE_NUMBER;
+        public static string STORAGE_NUMBER = ConfigurationManager.AppSettings.Get("STORAGE_NUMBER");
         // место расположения носителя
-        public static string STORAGE_PLACE;
+        public static string STORAGE_PLACE = ConfigurationManager.AppSettings.Get("STORAGE_PLACE");
         // содержание резервной копии
-        public static string[] COPY_CONTENT_ARR;
+        public static List<string> BACKUP_CONTENT_ARR = new List<string>();
         // работники
-        public static string[] WORKERS_ARR;
+        public static List<string> WORKERS_ARR = new List<string>();
 
         [STAThread]
         static void Main()
         {
-            STORAGE_NUMBER = ConfigurationManager.AppSettings.Get("STORAGE_NUMBER");
-            STORAGE_PLACE = ConfigurationManager.AppSettings.Get("STORAGE_PLACE");
-
-
-            var appSettings = ConfigurationManager.AppSettings;
+            NameValueCollection appSettings = ConfigurationManager.AppSettings;
             foreach (var key in appSettings.AllKeys)
             {
-                Console.WriteLine("Key: {0} Value: {1}", key, appSettings[key]);
+                if (key.Contains("COPY_CONTENT"))
+                {
+                    BACKUP_CONTENT_ARR.Add(appSettings[key]);
+                }
+                else if (key.Contains("WORKER"))
+                {
+                    WORKERS_ARR.Add(appSettings[key]);
+                }
             }
 
             Application.EnableVisualStyles();
