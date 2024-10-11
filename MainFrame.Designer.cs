@@ -54,7 +54,7 @@
             this.openFileButton.TabIndex = 1;
             this.openFileButton.Text = "Открыть";
             this.openFileButton.UseVisualStyleBackColor = true;
-            this.openFileButton.Click += new System.EventHandler(this.openFileButton_Click);
+            this.openFileButton.Click += new System.EventHandler(this.OpenFileButton_Click);
             // 
             // openFileDialog
             // 
@@ -77,7 +77,7 @@
             this.writeButton.TabIndex = 7;
             this.writeButton.Text = "Записать";
             this.writeButton.UseVisualStyleBackColor = true;
-            this.writeButton.Click += new System.EventHandler(this.writeButton_Click);
+            this.writeButton.Click += new System.EventHandler(this.WriteButton_Click);
             // 
             // contentTextBox
             // 
