@@ -44,11 +44,13 @@
             this.storageNumberField = new System.Windows.Forms.ComboBox();
             this.storagePlaceField = new System.Windows.Forms.ComboBox();
             this.personField = new System.Windows.Forms.ComboBox();
+            this.backupNameLabel = new System.Windows.Forms.Label();
+            this.backupNameField = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // openFileButton
             // 
-            this.openFileButton.Location = new System.Drawing.Point(21, 402);
+            this.openFileButton.Location = new System.Drawing.Point(21, 473);
             this.openFileButton.Name = "openFileButton";
             this.openFileButton.Size = new System.Drawing.Size(106, 36);
             this.openFileButton.TabIndex = 1;
@@ -64,14 +66,14 @@
             // 
             this.dateLabel.Location = new System.Drawing.Point(18, 32);
             this.dateLabel.Name = "dateLabel";
-            this.dateLabel.Size = new System.Drawing.Size(431, 23);
+            this.dateLabel.Size = new System.Drawing.Size(284, 23);
             this.dateLabel.TabIndex = 3;
             this.dateLabel.Text = "Дата создания резервной";
             this.dateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // writeButton
             // 
-            this.writeButton.Location = new System.Drawing.Point(158, 402);
+            this.writeButton.Location = new System.Drawing.Point(133, 473);
             this.writeButton.Name = "writeButton";
             this.writeButton.Size = new System.Drawing.Size(99, 36);
             this.writeButton.TabIndex = 7;
@@ -81,9 +83,9 @@
             // 
             // contentTextBox
             // 
-            this.contentTextBox.Location = new System.Drawing.Point(911, 12);
+            this.contentTextBox.Location = new System.Drawing.Point(771, 32);
             this.contentTextBox.Name = "contentTextBox";
-            this.contentTextBox.Size = new System.Drawing.Size(333, 435);
+            this.contentTextBox.Size = new System.Drawing.Size(473, 477);
             this.contentTextBox.TabIndex = 8;
             this.contentTextBox.Text = "";
             // 
@@ -91,7 +93,7 @@
             // 
             this.copyContentLabel.Location = new System.Drawing.Point(18, 99);
             this.copyContentLabel.Name = "copyContentLabel";
-            this.copyContentLabel.Size = new System.Drawing.Size(431, 16);
+            this.copyContentLabel.Size = new System.Drawing.Size(284, 16);
             this.copyContentLabel.TabIndex = 9;
             this.copyContentLabel.Text = "Содержание резервной копии";
             // 
@@ -99,7 +101,7 @@
             // 
             this.copySizeLabel.Location = new System.Drawing.Point(18, 157);
             this.copySizeLabel.Name = "copySizeLabel";
-            this.copySizeLabel.Size = new System.Drawing.Size(431, 23);
+            this.copySizeLabel.Size = new System.Drawing.Size(284, 23);
             this.copySizeLabel.TabIndex = 10;
             this.copySizeLabel.Text = "Размер резервной копии (Гб)";
             // 
@@ -107,7 +109,7 @@
             // 
             this.storageNumberLabel.Location = new System.Drawing.Point(18, 217);
             this.storageNumberLabel.Name = "storageNumberLabel";
-            this.storageNumberLabel.Size = new System.Drawing.Size(431, 16);
+            this.storageNumberLabel.Size = new System.Drawing.Size(284, 16);
             this.storageNumberLabel.TabIndex = 11;
             this.storageNumberLabel.Text = "Учетный номер носителя";
             // 
@@ -115,7 +117,7 @@
             // 
             this.storagePlaceLabel.Location = new System.Drawing.Point(18, 280);
             this.storagePlaceLabel.Name = "storagePlaceLabel";
-            this.storagePlaceLabel.Size = new System.Drawing.Size(437, 16);
+            this.storagePlaceLabel.Size = new System.Drawing.Size(284, 16);
             this.storagePlaceLabel.TabIndex = 12;
             this.storagePlaceLabel.Text = "Место хранения носителя";
             // 
@@ -123,14 +125,14 @@
             // 
             this.personLabel.Location = new System.Drawing.Point(18, 343);
             this.personLabel.Name = "personLabel";
-            this.personLabel.Size = new System.Drawing.Size(437, 23);
+            this.personLabel.Size = new System.Drawing.Size(284, 38);
             this.personLabel.TabIndex = 13;
             this.personLabel.Text = "ФИО, должность лица, осуществившего резервное копирование";
             // 
             // copySizeField
             // 
             this.copySizeField.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.copySizeField.Location = new System.Drawing.Point(473, 147);
+            this.copySizeField.Location = new System.Drawing.Point(326, 149);
             this.copySizeField.Name = "copySizeField";
             this.copySizeField.Size = new System.Drawing.Size(423, 28);
             this.copySizeField.TabIndex = 4;
@@ -138,7 +140,7 @@
             // dateField
             // 
             this.dateField.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dateField.Location = new System.Drawing.Point(473, 32);
+            this.dateField.Location = new System.Drawing.Point(326, 32);
             this.dateField.MaxDate = new System.DateTime(2100, 12, 31, 0, 0, 0, 0);
             this.dateField.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.dateField.Name = "dateField";
@@ -157,7 +159,7 @@
             "Database 1C",
             "Database Intep"});
             this.copyContentField.SelectedIndex = 0;
-            this.copyContentField.Location = new System.Drawing.Point(473, 93);
+            this.copyContentField.Location = new System.Drawing.Point(326, 91);
             this.copyContentField.Name = "copyContentField";
             this.copyContentField.Size = new System.Drawing.Size(423, 30);
             this.copyContentField.TabIndex = 15;
@@ -171,7 +173,7 @@
             "NA9NLF36",
             "WXF1CC1C8000"});
             this.storageNumberField.SelectedIndex = 0;
-            this.storageNumberField.Location = new System.Drawing.Point(473, 209);
+            this.storageNumberField.Location = new System.Drawing.Point(326, 209);
             this.storageNumberField.Name = "storageNumberField";
             this.storageNumberField.Size = new System.Drawing.Size(423, 30);
             this.storageNumberField.TabIndex = 16;
@@ -186,7 +188,7 @@
             "Кабинет 101",
             "Кабинет 105"});
             this.storagePlaceField.SelectedIndex = 0;
-            this.storagePlaceField.Location = new System.Drawing.Point(473, 272);
+            this.storagePlaceField.Location = new System.Drawing.Point(326, 272);
             this.storagePlaceField.Name = "storagePlaceField";
             this.storagePlaceField.Size = new System.Drawing.Size(423, 30);
             this.storagePlaceField.TabIndex = 17;
@@ -203,16 +205,35 @@
             "Андрущенко А.В., ведущий программист",
             "Гаманец В.Г., начальник отдела"});
             this.personField.SelectedIndex = 0;
-            this.personField.Location = new System.Drawing.Point(473, 333);
+            this.personField.Location = new System.Drawing.Point(326, 333);
             this.personField.Name = "personField";
             this.personField.Size = new System.Drawing.Size(423, 33);
             this.personField.TabIndex = 18;
+            // 
+            // backupNameLabel
+            // 
+            this.backupNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.backupNameLabel.Location = new System.Drawing.Point(18, 406);
+            this.backupNameLabel.Name = "backupNameLabel";
+            this.backupNameLabel.Size = new System.Drawing.Size(284, 23);
+            this.backupNameLabel.TabIndex = 19;
+            this.backupNameLabel.Text = "Бэкап";
+            // 
+            // backupNameField
+            // 
+            this.backupNameField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.backupNameField.Location = new System.Drawing.Point(18, 429);
+            this.backupNameField.Name = "backupNameField";
+            this.backupNameField.Size = new System.Drawing.Size(731, 27);
+            this.backupNameField.TabIndex = 20;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1267, 464);
+            this.ClientSize = new System.Drawing.Size(1267, 531);
+            this.Controls.Add(this.backupNameField);
+            this.Controls.Add(this.backupNameLabel);
             this.Controls.Add(this.personField);
             this.Controls.Add(this.storagePlaceField);
             this.Controls.Add(this.storageNumberField);
@@ -252,6 +273,8 @@
         private System.Windows.Forms.ComboBox storageNumberField;
         private System.Windows.Forms.ComboBox storagePlaceField;
         private System.Windows.Forms.ComboBox personField;
+        private System.Windows.Forms.Label backupNameLabel;
+        private System.Windows.Forms.Label backupNameField;
     }
 }
 

@@ -23,7 +23,6 @@ namespace ms_word_writer
 
             filename = openFileDialog.SafeFileName;
             filepath = openFileDialog.FileName;
-            contentTextBox.Text = $"Файл бэкапов {filename}\n";
 
             try
             {
@@ -40,10 +39,7 @@ namespace ms_word_writer
                 {
                     rowCount += (table.RowCount - 2);
                 }
-                contentTextBox.Text += $"Число таблиц = {tableCount}\n";
-                contentTextBox.Text += $"Число записей = {rowCount} \n";
-
-
+                backupNameField.Text = $"{filename}: таблиц = {tableCount}, записей = {rowCount}";
             }
             catch (System.IO.IOException exc)
             {
