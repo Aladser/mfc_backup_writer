@@ -64,25 +64,29 @@ namespace ms_word_writer
             // получаем значение размера бэкапа
             double copySize;
             copySizeField.Text = copySizeField.Text.Replace('.', ',');
-            if (copySizeField.Text.Contains("+")) {;
+            if (copySizeField.Text.Contains("+"))
+            {
                 // сумма чисел
 
                 string[] copySizeArr = copySizeField.Text.Split('+');
                 // убираются пробелы
-                for(int i=0; i<copySizeArr.Length; i++)
+                for (int i = 0; i < copySizeArr.Length; i++)
                 {
                     copySizeArr[i] = copySizeArr[i].Trim();
                 }
 
                 // парсинг суммы чисел
-                if (!double.TryParse(copySizeArr[0], out double firstValue) || !double.TryParse(copySizeArr[1], out double secondValue)){
+                if (!double.TryParse(copySizeArr[0], out double firstValue) || !double.TryParse(copySizeArr[1], out double secondValue))
+                {
                     contentTextBox.Text += "Одно из значений суммы резервных копий не является числом. Выражение должно быть вида Число1 + Число 2\n";
                     return;
-                } else
+                }
+                else
                 {
                     copySize = firstValue + secondValue;
                 }
-            } else
+            }
+            else
             {
                 // одно число
 
@@ -106,7 +110,6 @@ namespace ms_word_writer
             try
             {
                 TableCtl.Write(filepath, cellData);
-                copySizeField.Text = "";
                 contentTextBox.Text += $"{dateField.Text}: Записано\n";
             }
             catch (Exception exc)
@@ -114,6 +117,5 @@ namespace ms_word_writer
                 contentTextBox.Text += $"{exc}";
             }
         }
-
     }
 }

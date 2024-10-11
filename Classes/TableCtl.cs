@@ -9,19 +9,19 @@ namespace ms_word_writer.Classes
     /// </summary>
     public static class TableCtl
     {
+        const string FONT_NAME = "Times New Roman";
+        const int FONT_SIZE = 12;
         /// <summary>
         /// Создает таблицу
         /// </summary>
-        public static Table Create(Form form, string filepath)
+        public static Xceed.Document.NET.Table Create(Form form, string filepath)
         {
             var document = DocX.Load(filepath);
             var table = document.AddTable(2, 8);
 
+            // отступы ячеек
             float[] widths = { 80, 400, 400, 400, 400, 400, 400, 400 };
             table.SetWidths(widths, true);
-            // выравнивание в документе
-            //table.Alignment = Alignment.center;
-            // оступы
             table.SetTableCellMargin(TableCellMarginType.top, 10);
             table.SetTableCellMargin(TableCellMarginType.bottom, 10);
             table.SetTableCellMargin(TableCellMarginType.left, 5);
@@ -40,12 +40,8 @@ namespace ms_word_writer.Classes
             };
             for (int i = 0; i < headerArr.Length; i++)
             {
-                table.Rows[0].Cells[i].Paragraphs[0].Append(headerArr[i]);
-                table.Rows[0].Cells[i].Paragraphs[0].Alignment = Alignment.center;
-                table.Rows[0].Cells[i].Paragraphs[0].FontSize(12).Bold();
-                table.Rows[1].Cells[i].Paragraphs[0].Append((i + 1).ToString());
-                table.Rows[1].Cells[i].Paragraphs[0].Alignment = Alignment.center;
-                table.Rows[1].Cells[i].Paragraphs[0].FontSize(12);
+                WriteRowCellContent(table.Rows[0], i, headerArr[i], true);
+                WriteRowCellContent(table.Rows[1], i, (i + 1).ToString());
             }
 
             document.InsertTable(table);
@@ -60,17 +56,31 @@ namespace ms_word_writer.Classes
         /// </summary>
         public static void Write(string filepath, string[] data)
         {
-            using (var document = DocX.Load(filepath))
+            var document = DocX.Load(filepath);
+            var table = document.Tables[document.Tables.Count - 1];
+            var row = table.InsertRow();
+            for (int i = 0; i < data.Length; i++)
             {
-                var table = document.Tables[document.Tables.Count - 1];
-                var row = table.InsertRow();
-                for (int i = 0; i < data.Length; i++)
-                {
-                    row.Cells[i].Paragraphs[0].Append(data[i]);
-                    row.Cells[i].Paragraphs[0].Alignment = Alignment.center;
-                    row.Cells[i].Paragraphs[0].FontSize(12);
-                }
-                document.Save();
+                WriteRowCellContent(row, i, data[i]);
+            }
+            document.Save();
+
+        }
+
+        /// <summary>
+        /// Записывает данные в ячейку строки таблицы
+        /// </summary>
+        /// <param name="row"></param> Xceed.Document.NET.Row строка
+        /// <param name="cellIndex"></param> индекс ячейки
+        /// <param name="text"></param> содержание ячейки
+        private static void WriteRowCellContent(Xceed.Document.NET.Row row, int cellIndex, string text, bool isHeader = false)
+        {
+            row.Cells[cellIndex].Paragraphs[0].Append(text);
+            row.Cells[cellIndex].Paragraphs[0].Alignment = Alignment.center;
+            row.Cells[cellIndex].Paragraphs[0].FontSize(FONT_SIZE).Font(new Font(FONT_NAME));
+            if (isHeader)
+            {
+                row.Cells[cellIndex].Paragraphs[0].Bold();
             }
         }
     }
