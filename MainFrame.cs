@@ -1,6 +1,5 @@
 ﻿using ms_word_writer.Classes;
 using System;
-using System.Configuration;
 using System.Windows.Forms;
 using Xceed.Document.NET;
 using Xceed.Words.NET;
@@ -35,7 +34,8 @@ namespace ms_word_writer
                 {
                     TableCtl.Create(this, filepath);
                     tableCount++;
-                } else
+                }
+                else
                 {
                     // вычисление номера последней записи
                     Table lastTable = document.Tables[document.Tables.Count - 1];
