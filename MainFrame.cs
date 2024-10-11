@@ -1,6 +1,8 @@
 ﻿using ms_word_writer.Classes;
 using System;
+using System.Configuration;
 using System.Windows.Forms;
+using Xceed.Document.NET;
 using Xceed.Words.NET;
 
 namespace ms_word_writer
@@ -9,7 +11,8 @@ namespace ms_word_writer
     {
         string filename;
         string filepath;
-        int rowCount = 0;
+        int lastRecordNumber = 0;
+        // this.copyContentField.SelectedIndex = 0;
 
         public MainForm()
         {
@@ -17,13 +20,11 @@ namespace ms_word_writer
         }
 
         // открывает файл
-        private void openFileButton_Click(object sender, EventArgs e)
+        private void OpenFileButton_Click(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() != DialogResult.OK) return;
-
             filename = openFileDialog.SafeFileName;
             filepath = openFileDialog.FileName;
-            contentTextBox.Text = $"Файл бэкапов {filename}\n";
 
             try
             {
@@ -34,65 +35,81 @@ namespace ms_word_writer
                 {
                     TableCtl.Create(this, filepath);
                     tableCount++;
-                }
-
-                foreach (var table in document.Tables)
+                } else
                 {
-                    rowCount += (table.RowCount - 2);
+                    // вычисление номера последней записи
+                    Table lastTable = document.Tables[document.Tables.Count - 1];
+                    Row row = lastTable.Rows[lastTable.Rows.Count - 1];
+                    int.TryParse(row.Cells[0].Paragraphs[0].Text, out lastRecordNumber);
+                    backupNameField.Text = $"{filename}: таблиц = {tableCount}, последняя запись №{lastRecordNumber}";
+                    writeButton.Enabled = true;
+                    contentTextBox.Text = "";
                 }
-                contentTextBox.Text += $"Число таблиц = {tableCount}\n";
-                contentTextBox.Text += $"Число записей = {rowCount} \n";
-
-
             }
-            catch (System.IO.IOException exc)
+            catch (Exception exc)
             {
-                // файл открыт в другой программе
                 contentTextBox.Text = exc.Message;
             }
         }
 
         // записывает в таблицу
-        private void writeButton_Click(object sender, EventArgs e)
+        private void WriteButton_Click(object sender, EventArgs e)
         {
-            /*
-            if (filename == null || filename == null || filename == "" || filename == "")
+            // получаем значение размера бэкапа
+            double copySize;
+            copySizeField.Text = copySizeField.Text.Replace('.', ',');
+            if (copySizeField.Text.Contains("+"))
             {
-                contentTextBox.Text += "Не открыт файл\n";
-                return;
+                // сумма чисел
+
+                string[] copySizeArr = copySizeField.Text.Split('+');
+                // убираются пробелы
+                for (int i = 0; i < copySizeArr.Length; i++)
+                {
+                    copySizeArr[i] = copySizeArr[i].Trim();
+                }
+
+                // парсинг суммы чисел
+                if (!double.TryParse(copySizeArr[0], out double firstValue) || !double.TryParse(copySizeArr[1], out double secondValue))
+                {
+                    contentTextBox.Text += "Одно из значений суммы резервных копий не является числом. Выражение должно быть вида Число1 + Число 2\n";
+                    return;
+                }
+                else
+                {
+                    copySize = firstValue + secondValue;
+                }
             }
-            */
+            else
+            {
+                // одно число
+
+                if (!double.TryParse(copySizeField.Text, out copySize))
+                {
+                    contentTextBox.Text += "Значение размера резервной копии не является числом\n";
+                    return;
+                }
+            }
 
             string[] cellData = new string[8];
-            //cellData[0] = (rowCount + 1).ToString();
-            //cellData[1] = dateField.Value.ToString().Substring(0, 10);
-            //cellData[2] = copyContentField.SelectedItem.ToString();
-            cellData[3] = copySizeField.Text;
-            //cellData[4] = storageNumberField.SelectedItem.ToString();
-            //cellData[5] = storagePlaceField.SelectedItem.ToString();
-            //cellData[6] = personField.SelectedItem.ToString();
-            //cellData[7] = "";
+            cellData[0] = (++lastRecordNumber).ToString();
+            cellData[1] = dateField.Value.ToString().Substring(0, 10);
+            cellData[2] = copyContentField.SelectedItem.ToString();
+            cellData[3] = ((int)(copySize * 1024)).ToString();
+            cellData[4] = Program.STORAGE_NUMBER;
+            cellData[5] = Program.STORAGE_PLACE;
+            cellData[6] = workerField.SelectedItem.ToString();
+            cellData[7] = "";
 
-            Console.WriteLine(cellData[3].Contains("+"));
-            if(double.TryParse(cellData[3], out double number)) {
-                Console.WriteLine(number);
-            } else
-            {
-                Console.WriteLine("Значение размера резервной копии не является числом");
-            }
-            
-            /*
             try
             {
                 TableCtl.Write(filepath, cellData);
-                contentTextBox.Text += $"{dateField.Text}: Записано\n";
+                contentTextBox.Text += $"{dateField.Text}: записано\n";
             }
             catch (Exception exc)
             {
-                contentTextBox.Text += $"{exc}";
+                contentTextBox.Text += exc.Message;
             }
-            */
         }
-
     }
 }
