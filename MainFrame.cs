@@ -12,8 +12,6 @@ namespace ms_word_writer
         string filename;
         string filepath;
         int lastRecordNumber = 0;
-        string STORAGE_NUMBER = ConfigurationManager.AppSettings.Get("STORAGE_NUMBER");
-        string STORAGE_PLACE = ConfigurationManager.AppSettings.Get("STORAGE_PLACE");
         // this.copyContentField.SelectedIndex = 0;
 
         public MainForm()
@@ -98,9 +96,9 @@ namespace ms_word_writer
             cellData[1] = dateField.Value.ToString().Substring(0, 10);
             cellData[2] = copyContentField.SelectedItem.ToString();
             cellData[3] = ((int)(copySize * 1024)).ToString();
-            cellData[4] = STORAGE_NUMBER;
-            cellData[5] = STORAGE_PLACE;
-            cellData[6] = personField.SelectedItem.ToString();
+            cellData[4] = Program.STORAGE_NUMBER;
+            cellData[5] = Program.STORAGE_PLACE;
+            cellData[6] = workerField.SelectedItem.ToString();
             cellData[7] = "";
 
             try

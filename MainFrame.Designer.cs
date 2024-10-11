@@ -35,11 +35,11 @@
             this.contentTextBox = new System.Windows.Forms.RichTextBox();
             this.copyContentLabel = new System.Windows.Forms.Label();
             this.copySizeLabel = new System.Windows.Forms.Label();
-            this.personLabel = new System.Windows.Forms.Label();
+            this.workerLabel = new System.Windows.Forms.Label();
             this.copySizeField = new System.Windows.Forms.TextBox();
             this.dateField = new System.Windows.Forms.DateTimePicker();
             this.copyContentField = new System.Windows.Forms.ComboBox();
-            this.personField = new System.Windows.Forms.ComboBox();
+            this.workerField = new System.Windows.Forms.ComboBox();
             this.backupNameLabel = new System.Windows.Forms.Label();
             this.backupNameField = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -103,13 +103,13 @@
             this.copySizeLabel.TabIndex = 10;
             this.copySizeLabel.Text = "Размер резервной копии (Гб)";
             // 
-            // personLabel
+            // workerLabel
             // 
-            this.personLabel.Location = new System.Drawing.Point(18, 208);
-            this.personLabel.Name = "personLabel";
-            this.personLabel.Size = new System.Drawing.Size(284, 38);
-            this.personLabel.TabIndex = 13;
-            this.personLabel.Text = "ФИО, должность лица, осуществившего резервное копирование";
+            this.workerLabel.Location = new System.Drawing.Point(18, 208);
+            this.workerLabel.Name = "workerLabel";
+            this.workerLabel.Size = new System.Drawing.Size(284, 38);
+            this.workerLabel.TabIndex = 13;
+            this.workerLabel.Text = "ФИО, должность лица, осуществившего резервное копирование";
             // 
             // copySizeField
             // 
@@ -143,21 +143,21 @@
             this.copyContentField.Size = new System.Drawing.Size(423, 28);
             this.copyContentField.TabIndex = 15;
             // 
-            // personField
+            // workerField
             // 
-            this.personField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.personField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.personField.FormattingEnabled = true;
-            this.personField.Items.AddRange(new object[] {
+            this.workerField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.workerField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.workerField.FormattingEnabled = true;
+            this.workerField.Items.AddRange(new object[] {
             "Авраменко А.С., инженер-программист",
             "Тихонов В.Г., ведущий программист",
             "Хлобыстов И.В., .ведущий программист",
             "Андрущенко А.В., ведущий программист",
             "Гаманец В.Г., начальник отдела"});
-            this.personField.Location = new System.Drawing.Point(308, 208);
-            this.personField.Name = "personField";
-            this.personField.Size = new System.Drawing.Size(423, 28);
-            this.personField.TabIndex = 18;
+            this.workerField.Location = new System.Drawing.Point(308, 208);
+            this.workerField.Name = "workerField";
+            this.workerField.Size = new System.Drawing.Size(423, 28);
+            this.workerField.TabIndex = 18;
             // 
             // backupNameLabel
             // 
@@ -183,11 +183,11 @@
             this.ClientSize = new System.Drawing.Size(1267, 413);
             this.Controls.Add(this.backupNameField);
             this.Controls.Add(this.backupNameLabel);
-            this.Controls.Add(this.personField);
+            this.Controls.Add(this.workerField);
             this.Controls.Add(this.copyContentField);
             this.Controls.Add(this.dateField);
             this.Controls.Add(this.copySizeField);
-            this.Controls.Add(this.personLabel);
+            this.Controls.Add(this.workerLabel);
             this.Controls.Add(this.copySizeLabel);
             this.Controls.Add(this.copyContentLabel);
             this.Controls.Add(this.contentTextBox);
@@ -209,11 +209,11 @@
         private System.Windows.Forms.RichTextBox contentTextBox;
         private System.Windows.Forms.Label copyContentLabel;
         private System.Windows.Forms.Label copySizeLabel;
-        private System.Windows.Forms.Label personLabel;
+        private System.Windows.Forms.Label workerLabel;
         private System.Windows.Forms.TextBox copySizeField;
         private System.Windows.Forms.DateTimePicker dateField;
         private System.Windows.Forms.ComboBox copyContentField;
-        private System.Windows.Forms.ComboBox personField;
+        private System.Windows.Forms.ComboBox workerField;
         private System.Windows.Forms.Label backupNameLabel;
         private System.Windows.Forms.Label backupNameField;
     }
