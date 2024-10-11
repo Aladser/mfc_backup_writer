@@ -1,6 +1,7 @@
 ﻿using ms_word_writer.Classes;
 using System;
 using System.Windows.Forms;
+using Xceed.Document.NET;
 using Xceed.Words.NET;
 
 namespace ms_word_writer
@@ -9,7 +10,7 @@ namespace ms_word_writer
     {
         string filename;
         string filepath;
-        int rowCount = 0;
+        int lastRecordNumber = 0;
 
         public MainForm()
         {
@@ -33,18 +34,18 @@ namespace ms_word_writer
                 {
                     TableCtl.Create(this, filepath);
                     tableCount++;
-                }
-
-                foreach (var table in document.Tables)
+                } else
                 {
-                    rowCount += (table.RowCount - 2);
+                    // вычисление номера последней записи
+                    Table lastTable = document.Tables[document.Tables.Count - 1];
+                    Row row = lastTable.Rows[lastTable.Rows.Count - 1];
+                    int.TryParse(row.Cells[0].Paragraphs[0].Text, out lastRecordNumber);
+                    backupNameField.Text = $"{filename}: таблиц = {tableCount}, последняя запись №{lastRecordNumber}";
+                    writeButton.Enabled = true;
                 }
-                backupNameField.Text = $"{filename}: таблиц = {tableCount}, записей = {rowCount}";
-                writeButton.Enabled = true;
             }
-            catch (System.IO.IOException exc)
+            catch (Exception exc)
             {
-                // файл открыт в другой программе
                 contentTextBox.Text = exc.Message;
             }
         }
@@ -52,12 +53,6 @@ namespace ms_word_writer
         // записывает в таблицу
         private void WriteButton_Click(object sender, EventArgs e)
         {
-            if (filename == null || filename == null || filename == "" || filename == "")
-            {
-                contentTextBox.Text += "Не открыт файл\n";
-                return;
-            }
-
             // получаем значение размера бэкапа
             double copySize;
             copySizeField.Text = copySizeField.Text.Replace('.', ',');
@@ -95,7 +90,7 @@ namespace ms_word_writer
             }
 
             string[] cellData = new string[8];
-            cellData[0] = (rowCount + 1).ToString();
+            cellData[0] = (++lastRecordNumber).ToString();
             cellData[1] = dateField.Value.ToString().Substring(0, 10);
             cellData[2] = copyContentField.SelectedItem.ToString();
             cellData[3] = ((int)(copySize * 1024)).ToString();
@@ -107,11 +102,11 @@ namespace ms_word_writer
             try
             {
                 TableCtl.Write(filepath, cellData);
-                contentTextBox.Text += $"{dateField.Text}: Записано\n";
+                contentTextBox.Text += $"{dateField.Text}: записано\n";
             }
             catch (Exception exc)
             {
-                contentTextBox.Text += $"{exc}";
+                contentTextBox.Text += exc.Message;
             }
         }
     }

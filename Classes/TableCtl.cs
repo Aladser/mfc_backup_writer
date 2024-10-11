@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 using Xceed.Document.NET;
 using Xceed.Words.NET;
 
@@ -9,8 +10,8 @@ namespace ms_word_writer.Classes
     /// </summary>
     public static class TableCtl
     {
-        const string FONT_NAME = "Times New Roman";
-        const int FONT_SIZE = 12;
+        const string FONT_NAME = "Arial";
+        const double FONT_SIZE = 10.5;
         /// <summary>
         /// Создает таблицу
         /// </summary>
@@ -76,8 +77,15 @@ namespace ms_word_writer.Classes
         private static void WriteRowCellContent(Xceed.Document.NET.Row row, int cellIndex, string text, bool isHeader = false)
         {
             row.Cells[cellIndex].Paragraphs[0].Append(text);
+
+            Border b = new Border(Xceed.Document.NET.BorderStyle.Tcbs_single, BorderSize.one, 0, Color.Black);
+            row.Cells[cellIndex].SetBorder(TableCellBorderType.Top, b);
+            row.Cells[cellIndex].SetBorder(TableCellBorderType.Bottom, b);
+            row.Cells[cellIndex].SetBorder(TableCellBorderType.Left, b);
+            row.Cells[cellIndex].SetBorder(TableCellBorderType.Right, b);
             row.Cells[cellIndex].Paragraphs[0].Alignment = Alignment.center;
-            row.Cells[cellIndex].Paragraphs[0].FontSize(FONT_SIZE).Font(new Font(FONT_NAME));
+            row.Cells[cellIndex].Paragraphs[0].FontSize(FONT_SIZE).Font(new Xceed.Document.NET.Font(FONT_NAME));
+
             if (isHeader)
             {
                 row.Cells[cellIndex].Paragraphs[0].Bold();
