@@ -83,7 +83,10 @@ namespace ms_word_writer.Classes
             row.Cells[cellIndex].SetBorder(TableCellBorderType.Bottom, b);
             row.Cells[cellIndex].SetBorder(TableCellBorderType.Left, b);
             row.Cells[cellIndex].SetBorder(TableCellBorderType.Right, b);
+            row.Cells[cellIndex].VerticalAlignment = VerticalAlignment.Center;
             row.Cells[cellIndex].Paragraphs[0].Alignment = Alignment.center;
+            row.Cells[cellIndex].MarginTop = 8;
+            row.Cells[cellIndex].MarginBottom = 8;
             row.Cells[cellIndex].Paragraphs[0].FontSize(FONT_SIZE).Font(new Xceed.Document.NET.Font(FONT_NAME));
 
             if (isHeader)
