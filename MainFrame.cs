@@ -1,5 +1,7 @@
 ﻿using ms_word_writer.Classes;
 using System;
+using System.Configuration;
+using System.IO;
 using System.Windows.Forms;
 using Xceed.Document.NET;
 using Xceed.Words.NET;
@@ -9,13 +11,25 @@ namespace ms_word_writer
     public partial class MainForm : Form
     {
         string filename;
-        string filepath;
         int lastRecordNumber = 0;
-        // this.copyContentField.SelectedIndex = 0;
 
         public MainForm()
         {
             InitializeComponent();
+            // Поиск файла бэкпа в конфигурации
+            if(ConfigurationManager.AppSettings["BACKUP_FILE"] != "" )
+            {
+                if(File.Exists(ConfigurationManager.AppSettings["BACKUP_FILE"])) {
+                    filename = Path.GetFileName(ConfigurationManager.AppSettings["BACKUP_FILE"]);
+                    var document = DocX.Load(ConfigurationManager.AppSettings["BACKUP_FILE"]);
+                    ShowBackupFile(document);
+                    writeButton.Enabled = true;
+                } else
+                {
+                    Program.AddBackupFilepath("");
+                }
+
+            }
         }
 
         // открывает файл
@@ -23,25 +37,21 @@ namespace ms_word_writer
         {
             if (openFileDialog.ShowDialog() != DialogResult.OK) return;
             filename = openFileDialog.SafeFileName;
-            filepath = openFileDialog.FileName;
+            Program.AddBackupFilepath(openFileDialog.FileName);
 
             try
             {
-                var document = DocX.Load(filepath);
+                var document = DocX.Load(openFileDialog.FileName);
                 int tableCount = document.Tables.Count;
 
                 if (document.Tables.Count == 0)
                 {
-                    TableCtl.Create(this, filepath);
+                    TableCtl.Create(this, openFileDialog.FileName);
                     tableCount++;
                 }
                 else
                 {
-                    // вычисление номера последней записи
-                    Table lastTable = document.Tables[document.Tables.Count - 1];
-                    Row row = lastTable.Rows[lastTable.Rows.Count - 1];
-                    int.TryParse(row.Cells[0].Paragraphs[0].Text, out lastRecordNumber);
-                    backupNameField.Text = $"{filename}: таблиц = {tableCount}, последняя запись №{lastRecordNumber}";
+                    ShowBackupFile(document);
                     writeButton.Enabled = true;
                     contentField.Text = "";
                 }
@@ -103,13 +113,23 @@ namespace ms_word_writer
 
             try
             {
-                TableCtl.Write(filepath, cellData);
+                TableCtl.Write(ConfigurationManager.AppSettings["BACKUP_FILE"], cellData);
                 contentField.Text += $"{dateField.Text}: записано\n";
             }
             catch (Exception exc)
             {
                 contentField.Text += exc.Message;
             }
+        }
+
+        // показывает путь до бэкапа
+        private void ShowBackupFile(DocX document)
+        {
+            int tableCount = document.Tables.Count;
+            Table lastTable = document.Tables[document.Tables.Count - 1];
+            Row lastRow = lastTable.Rows[lastTable.Rows.Count - 1];
+            int.TryParse(lastRow.Cells[0].Paragraphs[0].Text, out lastRecordNumber);
+            backupNameField.Text = $"{filename}: таблиц = {tableCount}, последняя запись №{lastRecordNumber}";
         }
     }
 }

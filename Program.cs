@@ -37,5 +37,14 @@ namespace ms_word_writer
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
         }
+
+        // записывает в конфигурацию путь до файла бэкапа
+        public static void AddBackupFilepath(string filepath)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings["BACKUP_FILE"].Value = filepath;
+            config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
+        }
     }
 }
