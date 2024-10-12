@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.openFileButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -43,6 +44,9 @@
             this.backupNameLabel = new System.Windows.Forms.Label();
             this.backupNameField = new System.Windows.Forms.Label();
             this.contentField = new System.Windows.Forms.RichTextBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // openFileButton
@@ -130,7 +134,6 @@
             this.backupContentField.Items.AddRange(new object[] {
             "Database MFC",
             "Database 1C/Intep"});
-            this.backupContentField.SelectedIndex = 0;
             this.backupContentField.Location = new System.Drawing.Point(308, 93);
             this.backupContentField.Name = "backupContentField";
             this.backupContentField.Size = new System.Drawing.Size(423, 28);
@@ -147,7 +150,6 @@
             "Хлобыстов И.В., .ведущий программист",
             "Андрущенко А.В., ведущий программист",
             "Гаманец В.Г., начальник отдела"});
-            this.workerField.SelectedIndex = 0;
             this.workerField.Location = new System.Drawing.Point(308, 208);
             this.workerField.Name = "workerField";
             this.workerField.Size = new System.Drawing.Size(423, 28);
@@ -181,11 +183,22 @@
             this.contentField.TabIndex = 8;
             this.contentField.Text = "";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::ms_word_writer.Properties.Resources.info;
+            this.pictureBox1.Location = new System.Drawing.Point(703, 370);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(28, 21);
+            this.pictureBox1.TabIndex = 21;
+            this.pictureBox1.TabStop = false;
+            this.toolTip1.SetToolTip(this.pictureBox1, "MFC Backup Writer 1.0\r\nAladser (c)\r\n2024");
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1267, 413);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.backupNameField);
             this.Controls.Add(this.backupNameLabel);
             this.Controls.Add(this.workerField);
@@ -201,7 +214,8 @@
             this.Controls.Add(this.openFileButton);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-            this.Text = "Запись бэкапов в DOCX-файл";
+            this.Text = "МФЦ: Запись бэкапов в DOCX-файл 1.0";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -222,6 +236,8 @@
         private System.Windows.Forms.Label backupNameLabel;
         private System.Windows.Forms.Label backupNameField;
         private System.Windows.Forms.RichTextBox contentField;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 
