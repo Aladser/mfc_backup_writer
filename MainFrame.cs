@@ -147,8 +147,14 @@ namespace ms_word_writer
             {
                 contentField.Text += "-------\n";
             }
-            contentField.Text += $"Предпоследняя запись №{peltRow.Cells[0].Paragraphs[0].Text}  /  {peltRow.Cells[1].Paragraphs[0].Text}  /  {peltRow.Cells[2].Paragraphs[0].Text}\n";
-            contentField.Text += $"Последняя запись         №{lastRow.Cells[0].Paragraphs[0].Text}  /  {lastRow.Cells[1].Paragraphs[0].Text}  /  {lastRow.Cells[2].Paragraphs[0].Text}\n";
+
+            double.TryParse(peltRow.Cells[3].Paragraphs[0].Text, out double peltBackupSize);
+            peltBackupSize = Math.Round(peltBackupSize / 1024, 2);
+            contentField.Text += $"Предпоследняя запись №{peltRow.Cells[0].Paragraphs[0].Text}  /  {peltRow.Cells[1].Paragraphs[0].Text}  /  {peltRow.Cells[2].Paragraphs[0].Text} / {peltBackupSize}Гб\n";
+            double.TryParse(lastRow.Cells[3].Paragraphs[0].Text, out double lastBackupSize);
+
+            lastBackupSize = Math.Round(lastBackupSize / 1024, 2);
+            contentField.Text += $"Последняя запись         №{lastRow.Cells[0].Paragraphs[0].Text}  /  {lastRow.Cells[1].Paragraphs[0].Text}  /  {lastRow.Cells[2].Paragraphs[0].Text} / {lastBackupSize}Гб\n";
             backupNameField.Text = $"{filename}: таблиц = {tableCount}";
         }
     }
