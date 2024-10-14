@@ -119,12 +119,18 @@ namespace ms_word_writer
             try
             {
                 TableCtl.Write(ConfigurationManager.AppSettings["BACKUP_FILE"], cellData);
-                contentField.Text += $"{dateField.Text}: записано\n";
+                contentField.Text += $"{dateField.Text} {cellData[2]}: записано\n";
             }
             catch (Exception exc)
             {
                 contentField.Text += exc.Message;
             }
+        }
+
+        // показать файл бэкапа в проводнике
+        private void showBackupFileButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(filefolder);
         }
 
         // показывает путь до бэкапа
@@ -135,12 +141,6 @@ namespace ms_word_writer
             Row lastRow = lastTable.Rows[lastTable.Rows.Count - 1];
             int.TryParse(lastRow.Cells[0].Paragraphs[0].Text, out lastRecordNumber);
             backupNameField.Text = $"{filename}: таблиц = {tableCount}, последняя запись №{lastRecordNumber}";
-        }
-
-        // показать файл бэкапа в проводнике
-        private void showBackupFileButton_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(filefolder);
         }
     }
 }
