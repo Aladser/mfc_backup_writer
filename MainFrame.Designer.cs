@@ -1,4 +1,6 @@
-﻿namespace ms_word_writer
+﻿using System;
+
+namespace ms_word_writer
 {
     partial class MainForm
     {
@@ -127,32 +129,26 @@
             this.dateField.Size = new System.Drawing.Size(423, 26);
             this.dateField.TabIndex = 2;
             // 
-            // backupContentField
+            // backupContentField СПИСОК
             // 
             this.backupContentField.DisplayMember = "0";
             this.backupContentField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.backupContentField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.backupContentField.FormattingEnabled = true;
-            this.backupContentField.Items.AddRange(new object[] {
-            "Database MFC",
-            "Database 1C/Intep"});
+
+            this.backupContentField.Items.AddRange(Program.BACKUP_CONTENT_ARR.ToArray());
             this.backupContentField.SelectedIndex = 0;
             this.backupContentField.Location = new System.Drawing.Point(308, 93);
             this.backupContentField.Name = "backupContentField";
             this.backupContentField.Size = new System.Drawing.Size(423, 28);
             this.backupContentField.TabIndex = 15;
             // 
-            // workerField
+            // workerField СПИСОК
             // 
             this.workerField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.workerField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.workerField.FormattingEnabled = true;
-            this.workerField.Items.AddRange(new object[] {
-            "Авраменко А.С., инженер-программист",
-            "Тихонов В.Г., ведущий программист",
-            "Хлобыстов И.В., .ведущий программист",
-            "Андрущенко А.В., ведущий программист",
-            "Гаманец В.Г., начальник отдела"});
+            this.workerField.Items.AddRange(Program.WORKERS_ARR.ToArray());
             this.workerField.SelectedIndex = 0;
             this.workerField.Location = new System.Drawing.Point(308, 208);
             this.workerField.Name = "workerField";
