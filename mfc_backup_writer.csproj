@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E510BE2B-F6F7-497A-B697-C5E538D91B10}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ms_word_writer</RootNamespace>
-    <AssemblyName>ms_word_writer</AssemblyName>
+    <RootNamespace>mfc_backup_writer</RootNamespace>
+    <AssemblyName>mfc_backup_writer</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
