@@ -3,6 +3,7 @@ using System;
 using System.Configuration;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Xceed.Document.NET;
 using Xceed.Words.NET;
 
@@ -85,20 +86,19 @@ namespace ms_word_writer
                 }
 
                 // парсинг суммы чисел
-                if (!double.TryParse(backupSizeArr[0], out double firstValue) || !double.TryParse(backupSizeArr[1], out double secondValue))
+                if (double.TryParse(backupSizeArr[0], out double firstValue) && double.TryParse(backupSizeArr[1], out double secondValue))
                 {
-                    contentField.Text += "Одно из значений суммы резервных копий не является числом. Выражение должно быть вида Число1 + Число 2\n";
-                    return;
+                    backupSize = firstValue + secondValue;
                 }
                 else
                 {
-                    backupSize = firstValue + secondValue;
+                    contentField.Text += "Одно из значений суммы резервных копий не является числом. Выражение должно быть вида Число1 + Число 2\n";
+                    return;
                 }
             }
             else
             {
                 // одно число
-
                 if (!double.TryParse(backupSizeField.Text, out backupSize))
                 {
                     contentField.Text += "Значение размера резервной копии не является числом\n";
@@ -118,13 +118,20 @@ namespace ms_word_writer
 
             try
             {
-                TableCtl.Write(ConfigurationManager.AppSettings["BACKUP_FILE"], cellData);
-                contentField.Text += $"{dateField.Text}: записано\n";
+                DocX document = TableCtl.Write(ConfigurationManager.AppSettings["BACKUP_FILE"], cellData);
+                contentField.Text += $"{dateField.Text} {cellData[2]}: записано\n";
+                ShowBackupFile(document);
             }
             catch (Exception exc)
             {
                 contentField.Text += exc.Message;
             }
+        }
+
+        // показать файл бэкапа в проводнике
+        private void showBackupFileButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(filefolder);
         }
 
         // показывает путь до бэкапа
@@ -134,13 +141,9 @@ namespace ms_word_writer
             Table lastTable = document.Tables[document.Tables.Count - 1];
             Row lastRow = lastTable.Rows[lastTable.Rows.Count - 1];
             int.TryParse(lastRow.Cells[0].Paragraphs[0].Text, out lastRecordNumber);
-            backupNameField.Text = $"{filename}: таблиц = {tableCount}, последняя запись №{lastRecordNumber}";
-        }
-
-        // показать файл бэкапа в проводнике
-        private void showBackupFileButton_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(filefolder);
+            string recordDate = lastRow.Cells[1].Paragraphs[0].Text;
+            string recordContent = lastRow.Cells[2].Paragraphs[0].Text;
+            backupNameField.Text = $"{filename}: таблиц = {tableCount}, последняя запись - №{lastRecordNumber}|{recordDate}|{recordContent}";
         }
     }
 }

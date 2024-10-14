@@ -55,7 +55,7 @@ namespace ms_word_writer.Classes
         /// <param name="filepath"></param>
         /// <param name="data"></param>
         /// </summary>
-        public static void Write(string filepath, string[] data)
+        public static DocX Write(string filepath, string[] data)
         {
             var document = DocX.Load(filepath);
             var table = document.Tables[document.Tables.Count - 1];
@@ -65,6 +65,8 @@ namespace ms_word_writer.Classes
                 WriteRowCellContent(row, i, data[i]);
             }
             document.Save();
+
+            return document;
 
         }
 
