@@ -129,13 +129,12 @@ namespace ms_word_writer
             this.dateField.Size = new System.Drawing.Size(423, 26);
             this.dateField.TabIndex = 2;
             // 
-            // backupContentField СПИСОК
+            // backupContentField
             // 
             this.backupContentField.DisplayMember = "0";
             this.backupContentField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.backupContentField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.backupContentField.FormattingEnabled = true;
-
             this.backupContentField.Items.AddRange(Program.BACKUP_CONTENT_ARR.ToArray());
             this.backupContentField.SelectedIndex = 0;
             this.backupContentField.Location = new System.Drawing.Point(308, 93);
@@ -143,7 +142,7 @@ namespace ms_word_writer
             this.backupContentField.Size = new System.Drawing.Size(423, 28);
             this.backupContentField.TabIndex = 15;
             // 
-            // workerField СПИСОК
+            // workerField
             // 
             this.workerField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.workerField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -179,7 +178,7 @@ namespace ms_word_writer
             this.contentField.Location = new System.Drawing.Point(755, 32);
             this.contentField.Name = "contentField";
             this.contentField.ReadOnly = true;
-            this.contentField.Size = new System.Drawing.Size(489, 359);
+            this.contentField.Size = new System.Drawing.Size(542, 359);
             this.contentField.TabIndex = 8;
             this.contentField.Text = "";
             // 
@@ -208,7 +207,7 @@ namespace ms_word_writer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1267, 424);
+            this.ClientSize = new System.Drawing.Size(1337, 424);
             this.Controls.Add(this.showBackupFileButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.backupNameField);
