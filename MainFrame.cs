@@ -3,7 +3,6 @@ using System;
 using System.Configuration;
 using System.IO;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using Xceed.Document.NET;
 using Xceed.Words.NET;
 
@@ -19,16 +18,18 @@ namespace ms_word_writer
         {
             InitializeComponent();
             // Поиск файла бэкпа в конфигурации
-            if(ConfigurationManager.AppSettings["BACKUP_FILE"] != "" )
+            if (ConfigurationManager.AppSettings["BACKUP_FILE"] != "")
             {
-                if(File.Exists(ConfigurationManager.AppSettings["BACKUP_FILE"])) {
+                if (File.Exists(ConfigurationManager.AppSettings["BACKUP_FILE"]))
+                {
                     filename = Path.GetFileName(ConfigurationManager.AppSettings["BACKUP_FILE"]);
                     filefolder = Path.GetDirectoryName(ConfigurationManager.AppSettings["BACKUP_FILE"]);
                     var document = DocX.Load(ConfigurationManager.AppSettings["BACKUP_FILE"]);
                     ShowBackupFile(document, true);
                     writeButton.Enabled = true;
                     showBackupFileButton.Enabled = true;
-                } else
+                }
+                else
                 {
                     Program.AddBackupFilepath("");
                 }
