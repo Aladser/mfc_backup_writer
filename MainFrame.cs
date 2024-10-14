@@ -3,6 +3,7 @@ using System;
 using System.Configuration;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Xceed.Document.NET;
 using Xceed.Words.NET;
 
@@ -118,8 +119,9 @@ namespace ms_word_writer
 
             try
             {
-                TableCtl.Write(ConfigurationManager.AppSettings["BACKUP_FILE"], cellData);
+                DocX document = TableCtl.Write(ConfigurationManager.AppSettings["BACKUP_FILE"], cellData);
                 contentField.Text += $"{dateField.Text} {cellData[2]}: записано\n";
+                ShowBackupFile(document);
             }
             catch (Exception exc)
             {
@@ -140,7 +142,9 @@ namespace ms_word_writer
             Table lastTable = document.Tables[document.Tables.Count - 1];
             Row lastRow = lastTable.Rows[lastTable.Rows.Count - 1];
             int.TryParse(lastRow.Cells[0].Paragraphs[0].Text, out lastRecordNumber);
-            backupNameField.Text = $"{filename}: таблиц = {tableCount}, последняя запись №{lastRecordNumber}";
+            string recordDate = lastRow.Cells[1].Paragraphs[0].Text;
+            string recordContent = lastRow.Cells[2].Paragraphs[0].Text;
+            backupNameField.Text = $"{filename}: таблиц = {tableCount}, последняя запись - №{lastRecordNumber}|{recordDate}|{recordContent}";
         }
     }
 }
