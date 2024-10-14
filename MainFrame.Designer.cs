@@ -136,6 +136,7 @@
             this.backupContentField.Items.AddRange(new object[] {
             "Database MFC",
             "Database 1C/Intep"});
+            this.backupContentField.SelectedIndex = 0;
             this.backupContentField.Location = new System.Drawing.Point(308, 93);
             this.backupContentField.Name = "backupContentField";
             this.backupContentField.Size = new System.Drawing.Size(423, 28);
@@ -152,6 +153,7 @@
             "Хлобыстов И.В., .ведущий программист",
             "Андрущенко А.В., ведущий программист",
             "Гаманец В.Г., начальник отдела"});
+            this.workerField.SelectedIndex = 0;
             this.workerField.Location = new System.Drawing.Point(308, 208);
             this.workerField.Name = "workerField";
             this.workerField.Size = new System.Drawing.Size(423, 28);

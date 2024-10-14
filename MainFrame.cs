@@ -143,7 +143,8 @@ namespace ms_word_writer
             int.TryParse(lastRow.Cells[0].Paragraphs[0].Text, out lastRecordNumber);
             string recordDate = lastRow.Cells[1].Paragraphs[0].Text;
             string recordContent = lastRow.Cells[2].Paragraphs[0].Text;
-            backupNameField.Text = $"{filename}: таблиц = {tableCount}, последняя запись - №{lastRecordNumber}|{recordDate}|{recordContent}";
+            contentField.Text = $"Последняя запись - №{lastRecordNumber} {recordDate} {recordContent}\n";
+            backupNameField.Text = $"{filename}: таблиц = {tableCount}";
         }
     }
 }
