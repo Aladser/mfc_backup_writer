@@ -11,6 +11,7 @@ namespace ms_word_writer
     public partial class MainForm : Form
     {
         string filename;
+        string filefolder;
         int lastRecordNumber = 0;
 
         public MainForm()
@@ -21,9 +22,11 @@ namespace ms_word_writer
             {
                 if(File.Exists(ConfigurationManager.AppSettings["BACKUP_FILE"])) {
                     filename = Path.GetFileName(ConfigurationManager.AppSettings["BACKUP_FILE"]);
+                    filefolder = Path.GetDirectoryName(ConfigurationManager.AppSettings["BACKUP_FILE"]);
                     var document = DocX.Load(ConfigurationManager.AppSettings["BACKUP_FILE"]);
                     ShowBackupFile(document);
                     writeButton.Enabled = true;
+                    showBackupFileButton.Enabled = true;
                 } else
                 {
                     Program.AddBackupFilepath("");
@@ -37,6 +40,7 @@ namespace ms_word_writer
         {
             if (openFileDialog.ShowDialog() != DialogResult.OK) return;
             filename = openFileDialog.SafeFileName;
+            filefolder = Path.GetDirectoryName(openFileDialog.FileName);
             Program.AddBackupFilepath(openFileDialog.FileName);
 
             try
@@ -53,6 +57,7 @@ namespace ms_word_writer
                 {
                     ShowBackupFile(document);
                     writeButton.Enabled = true;
+                    showBackupFileButton.Enabled = true;
                     contentField.Text = "";
                 }
             }
@@ -130,6 +135,12 @@ namespace ms_word_writer
             Row lastRow = lastTable.Rows[lastTable.Rows.Count - 1];
             int.TryParse(lastRow.Cells[0].Paragraphs[0].Text, out lastRecordNumber);
             backupNameField.Text = $"{filename}: таблиц = {tableCount}, последняя запись №{lastRecordNumber}";
+        }
+
+        // показать файл бэкапа в проводнике
+        private void showBackupFileButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(filefolder);
         }
     }
 }

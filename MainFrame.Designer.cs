@@ -46,6 +46,7 @@
             this.contentField = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.showBackupFileButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,7 +76,7 @@
             // writeButton
             // 
             this.writeButton.Enabled = false;
-            this.writeButton.Location = new System.Drawing.Point(150, 355);
+            this.writeButton.Location = new System.Drawing.Point(148, 355);
             this.writeButton.Name = "writeButton";
             this.writeButton.Size = new System.Drawing.Size(99, 36);
             this.writeButton.TabIndex = 7;
@@ -193,11 +194,23 @@
             this.pictureBox1.TabStop = false;
             this.toolTip1.SetToolTip(this.pictureBox1, "MFC Backup Writer 1.0\r\nAladser (c)\r\n2024");
             // 
+            // showBackupFileButton
+            // 
+            this.showBackupFileButton.Enabled = false;
+            this.showBackupFileButton.Location = new System.Drawing.Point(270, 355);
+            this.showBackupFileButton.Name = "showBackupFileButton";
+            this.showBackupFileButton.Size = new System.Drawing.Size(136, 36);
+            this.showBackupFileButton.TabIndex = 22;
+            this.showBackupFileButton.Text = "Файл бэкапа";
+            this.showBackupFileButton.UseVisualStyleBackColor = true;
+            this.showBackupFileButton.Click += new System.EventHandler(this.showBackupFileButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1267, 413);
+            this.Controls.Add(this.showBackupFileButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.backupNameField);
             this.Controls.Add(this.backupNameLabel);
@@ -238,6 +251,7 @@
         private System.Windows.Forms.RichTextBox contentField;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button showBackupFileButton;
     }
 }
 
