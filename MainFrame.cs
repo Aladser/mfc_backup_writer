@@ -86,20 +86,19 @@ namespace ms_word_writer
                 }
 
                 // парсинг суммы чисел
-                if (!double.TryParse(backupSizeArr[0], out double firstValue) || !double.TryParse(backupSizeArr[1], out double secondValue))
+                if (double.TryParse(backupSizeArr[0], out double firstValue) && double.TryParse(backupSizeArr[1], out double secondValue))
                 {
-                    contentField.Text += "Одно из значений суммы резервных копий не является числом. Выражение должно быть вида Число1 + Число 2\n";
-                    return;
+                    backupSize = firstValue + secondValue;
                 }
                 else
                 {
-                    backupSize = firstValue + secondValue;
+                    contentField.Text += "Одно из значений суммы резервных копий не является числом. Выражение должно быть вида Число1 + Число 2\n";
+                    return;
                 }
             }
             else
             {
                 // одно число
-
                 if (!double.TryParse(backupSizeField.Text, out backupSize))
                 {
                     contentField.Text += "Значение размера резервной копии не является числом\n";

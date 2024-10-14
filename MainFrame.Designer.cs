@@ -63,6 +63,7 @@
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog1";
+            this.openFileDialog.Filter = "Microsost Word (*.docx)|*.docx|Все файлы(*.*)|*.*";
             // 
             // dateLabel
             // 
@@ -209,7 +210,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1267, 413);
+            this.ClientSize = new System.Drawing.Size(1267, 424);
             this.Controls.Add(this.showBackupFileButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.backupNameField);
