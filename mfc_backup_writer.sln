@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ms_word_writer", "ms_word_writer.csproj", "{E510BE2B-F6F7-497A-B697-C5E538D91B10}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mfc_backup_writer", "mfc_backup_writer.csproj", "{E510BE2B-F6F7-497A-B697-C5E538D91B10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
