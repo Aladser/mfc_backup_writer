@@ -25,7 +25,7 @@ namespace ms_word_writer
                     filename = Path.GetFileName(ConfigurationManager.AppSettings["BACKUP_FILE"]);
                     filefolder = Path.GetDirectoryName(ConfigurationManager.AppSettings["BACKUP_FILE"]);
                     var document = DocX.Load(ConfigurationManager.AppSettings["BACKUP_FILE"]);
-                    ShowBackupFile(document);
+                    ShowBackupFile(document, true);
                     writeButton.Enabled = true;
                     showBackupFileButton.Enabled = true;
                 } else
@@ -56,10 +56,10 @@ namespace ms_word_writer
                 }
                 else
                 {
-                    ShowBackupFile(document);
+                    contentField.Text = "";
+                    ShowBackupFile(document, true);
                     writeButton.Enabled = true;
                     showBackupFileButton.Enabled = true;
-                    contentField.Text = "";
                 }
             }
             catch (Exception exc)
@@ -119,7 +119,6 @@ namespace ms_word_writer
             try
             {
                 DocX document = TableCtl.Write(ConfigurationManager.AppSettings["BACKUP_FILE"], cellData);
-                contentField.Text += $"{dateField.Text} {cellData[2]}: записано\n";
                 ShowBackupFile(document);
             }
             catch (Exception exc)
@@ -135,15 +134,20 @@ namespace ms_word_writer
         }
 
         // показывает путь до бэкапа
-        private void ShowBackupFile(DocX document)
+        private void ShowBackupFile(DocX document, bool isFileOpening = false)
         {
             int tableCount = document.Tables.Count;
             Table lastTable = document.Tables[document.Tables.Count - 1];
+            Row peltRow = lastTable.Rows[lastTable.Rows.Count - 2];
             Row lastRow = lastTable.Rows[lastTable.Rows.Count - 1];
             int.TryParse(lastRow.Cells[0].Paragraphs[0].Text, out lastRecordNumber);
-            string recordDate = lastRow.Cells[1].Paragraphs[0].Text;
-            string recordContent = lastRow.Cells[2].Paragraphs[0].Text;
-            contentField.Text = $"Последняя запись - №{lastRecordNumber} {recordDate} {recordContent}\n";
+
+            if (!isFileOpening)
+            {
+                contentField.Text += "-------\n";
+            }
+            contentField.Text += $"Предпоследняя запись №{peltRow.Cells[0].Paragraphs[0].Text}  /  {peltRow.Cells[1].Paragraphs[0].Text}  /  {peltRow.Cells[2].Paragraphs[0].Text}\n";
+            contentField.Text += $"Последняя запись         №{lastRow.Cells[0].Paragraphs[0].Text}  /  {lastRow.Cells[1].Paragraphs[0].Text}  /  {lastRow.Cells[2].Paragraphs[0].Text}\n";
             backupNameField.Text = $"{filename}: таблиц = {tableCount}";
         }
     }
