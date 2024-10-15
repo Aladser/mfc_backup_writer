@@ -126,7 +126,8 @@ namespace ms_word_writer
 
             try
             {
-                DocX document = TableCtl.Write(backupFilename, cellData);
+                DocX document = DocX.Load(backupFilename);
+                TableCtl.Write(document, cellData);
                 ShowTableLastRows(document);
             }
             catch (Exception exc)
@@ -175,7 +176,7 @@ namespace ms_word_writer
                 Row peltRow = lastTable.Rows[lastTable.Rows.Count - 2];
                 double.TryParse(peltRow.Cells[3].Paragraphs[0].Text, out double peltBackupSize);
                 peltBackupSize = Math.Round(peltBackupSize / 1024, 2);
-                contentField.Text += $"Предпоследняя запись {peltRow.Cells[0].Paragraphs[0].Text}  /  {peltRow.Cells[1].Paragraphs[0].Text}  /  {peltRow.Cells[2].Paragraphs[0].Text} / {peltBackupSize}Гб\n";
+                contentField.Text += $"Предпоследняя запись {peltRow.Cells[0].Paragraphs[0].Text}  /  {peltRow.Cells[1].Paragraphs[0].Text}  /  {peltRow.Cells[2].Paragraphs[0].Text} / {peltBackupSize} Гб\n";
             }
             // есть минимум одна запись
             if (lastTable.RowCount > 2)
@@ -183,7 +184,7 @@ namespace ms_word_writer
                 Row lastRow = lastTable.Rows[lastTable.Rows.Count - 1];
                 double.TryParse(lastRow.Cells[3].Paragraphs[0].Text, out double lastBackupSize);
                 lastBackupSize = Math.Round(lastBackupSize / 1024, 2);
-                contentField.Text += $"Последняя запись         {lastRow.Cells[0].Paragraphs[0].Text}  /  {lastRow.Cells[1].Paragraphs[0].Text}  /  {lastRow.Cells[2].Paragraphs[0].Text} / {lastBackupSize}Гб\n";
+                contentField.Text += $"Последняя запись         {lastRow.Cells[0].Paragraphs[0].Text}  /  {lastRow.Cells[1].Paragraphs[0].Text}  /  {lastRow.Cells[2].Paragraphs[0].Text} / {lastBackupSize} Гб\n";
             }
         }
     }
