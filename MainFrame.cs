@@ -187,5 +187,21 @@ namespace ms_word_writer
                 contentField.Text += $"Последняя запись         {lastRow.Cells[0].Paragraphs[0].Text}  /  {lastRow.Cells[1].Paragraphs[0].Text}  /  {lastRow.Cells[2].Paragraphs[0].Text} / {lastBackupSize} Гб\n";
             }
         }
+
+        private void removeLastRowButton_Click(object sender, EventArgs e)
+        {
+            var document = DocX.Load(backupFilename);
+
+            if(document.Tables.Count == 0)
+            {
+                return;
+            }
+
+            Table lastTable = document.Tables[document.Tables.Count - 1];
+            lastTable.RemoveRow();
+
+            document.Save();
+            ShowTableLastRows(document);
+        }
     }
 }
