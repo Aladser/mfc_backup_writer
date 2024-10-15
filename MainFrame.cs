@@ -73,6 +73,7 @@ namespace ms_word_writer
 
             writeButton.Enabled = true;
             showBackupFileButton.Enabled = true;
+            removeLastRowButton.Enabled = true;
 
             lastRecordNumber = TableCtl.GetLastRecordNumber(document);
         }

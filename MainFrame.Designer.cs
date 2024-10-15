@@ -136,8 +136,8 @@ namespace ms_word_writer
             this.backupContentField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.backupContentField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.backupContentField.FormattingEnabled = true;
-            this.backupContentField.Items.AddRange(Program.BACKUP_CONTENT_ARR.ToArray());
-            this.backupContentField.SelectedIndex = 0;
+            this.backupContentField.Items.AddRange(new object[] {
+            "1"});
             this.backupContentField.Location = new System.Drawing.Point(308, 93);
             this.backupContentField.Name = "backupContentField";
             this.backupContentField.Size = new System.Drawing.Size(423, 28);
@@ -148,8 +148,8 @@ namespace ms_word_writer
             this.workerField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.workerField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.workerField.FormattingEnabled = true;
-            this.workerField.Items.AddRange(Program.WORKERS_ARR.ToArray());
-            this.workerField.SelectedIndex = 0;
+            this.workerField.Items.AddRange(new object[] {
+            "1"});
             this.workerField.Location = new System.Drawing.Point(308, 208);
             this.workerField.Name = "workerField";
             this.workerField.Size = new System.Drawing.Size(423, 28);
@@ -206,6 +206,7 @@ namespace ms_word_writer
             // 
             // removeLastRowButton
             // 
+            this.removeLastRowButton.Enabled = false;
             this.removeLastRowButton.Location = new System.Drawing.Point(489, 355);
             this.removeLastRowButton.Name = "removeLastRowButton";
             this.removeLastRowButton.Size = new System.Drawing.Size(150, 50);
