@@ -3,6 +3,7 @@ using System;
 using System.Configuration;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Xceed.Document.NET;
 using Xceed.Words.NET;
 
@@ -22,63 +23,52 @@ namespace ms_word_writer
             {
                 if (File.Exists(ConfigurationManager.AppSettings["BACKUP_FILE"]))
                 {
-                    filename = Path.GetFileName(ConfigurationManager.AppSettings["BACKUP_FILE"]);
-                    filefolder = Path.GetDirectoryName(ConfigurationManager.AppSettings["BACKUP_FILE"]);
-                    var document = DocX.Load(ConfigurationManager.AppSettings["BACKUP_FILE"]);
-
-                    int totalRowCount = 0;
-                    foreach(var table in document.Tables)
-                    {
-                        totalRowCount += table.RowCount;
-                    }
-                    totalRowCount -= document.Tables.Count * 2;
-                    backupNameField.Text = $"{filename}. Таблиц = {document.Tables.Count}. Записей - {totalRowCount}";
-                    ShowTableLastRows(document, true);
-
-                    writeButton.Enabled = true;
-                    showBackupFileButton.Enabled = true;
+                    ShowBackupFileInfo(ConfigurationManager.AppSettings["BACKUP_FILE"]);
                 }
                 else
                 {
-                    Program.AddBackupFilepath("");
+                    Program.WriteBackupFilepath("");
                 }
 
             }
         }
 
-        // открывает файл
         private void OpenFileButton_Click(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() != DialogResult.OK) return;
-            filename = openFileDialog.SafeFileName;
-            filefolder = Path.GetDirectoryName(openFileDialog.FileName);
-            Program.AddBackupFilepath(openFileDialog.FileName);
 
-            try
+            var document = DocX.Load(openFileDialog.FileName);
+            if (document.Tables.Count == 0)
             {
-                var document = DocX.Load(openFileDialog.FileName);
-                int tableCount = document.Tables.Count;
+                TableCtl.Create(this, openFileDialog.FileName);
+            }
 
-                if (document.Tables.Count == 0)
-                {
-                    TableCtl.Create(this, openFileDialog.FileName);
-                    tableCount++;
-                }
-                else
-                {
-                    contentField.Text = "";
-                    ShowTableLastRows(document, true);
-                    writeButton.Enabled = true;
-                    showBackupFileButton.Enabled = true;
-                }
-            }
-            catch (Exception exc)
-            {
-                contentField.Text = exc.Message;
-            }
+            Program.WriteBackupFilepath(openFileDialog.FileName);
+            ShowBackupFileInfo(openFileDialog.FileName);
         }
 
-        // записывает в таблицу
+        // Показывает информацию о бэкапе
+        private void ShowBackupFileInfo(string filepath)
+        {
+            contentField.Text = "";
+            filename = Path.GetFileName(filepath);
+            filefolder = Path.GetDirectoryName(filepath);
+            var document = DocX.Load(filepath);
+
+            int totalRowCount = 0;
+            foreach (var table in document.Tables)
+            {
+                totalRowCount += table.RowCount;
+            }
+            totalRowCount -= document.Tables.Count * 2;
+            backupNameField.Text = $"{filename}. Таблиц = {document.Tables.Count}. Записей - {totalRowCount}";
+
+            ShowTableLastRows(document, true);
+
+            writeButton.Enabled = true;
+            showBackupFileButton.Enabled = true;
+        }
+
         private void WriteButton_Click(object sender, EventArgs e)
         {
             // получаем значение размера бэкапа
@@ -137,13 +127,16 @@ namespace ms_word_writer
             }
         }
 
-        // показать файл бэкапа в проводнике
-        private void showBackupFileButton_Click(object sender, EventArgs e)
+        private void ShowBackupFileButton_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(filefolder);
         }
 
-        // показывает путь до бэкапа
+        /// <summary>
+        /// Выводит последние записи
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="isFileOpening"></param>
         private void ShowTableLastRows(DocX document, bool isFileOpening = false)
         {
             Table lastTable;
@@ -174,7 +167,7 @@ namespace ms_word_writer
                 Row peltRow = lastTable.Rows[lastTable.Rows.Count - 2];
                 double.TryParse(peltRow.Cells[3].Paragraphs[0].Text, out double peltBackupSize);
                 peltBackupSize = Math.Round(peltBackupSize / 1024, 2);
-                contentField.Text += $"Предпоследняя запись №{peltRow.Cells[0].Paragraphs[0].Text}  /  {peltRow.Cells[1].Paragraphs[0].Text}  /  {peltRow.Cells[2].Paragraphs[0].Text} / {peltBackupSize}Гб\n";
+                contentField.Text += $"Предпоследняя запись {peltRow.Cells[0].Paragraphs[0].Text}  /  {peltRow.Cells[1].Paragraphs[0].Text}  /  {peltRow.Cells[2].Paragraphs[0].Text} / {peltBackupSize}Гб\n";
             }
             // есть минимум одна запись
             if (lastTable.RowCount > 2)
@@ -182,7 +175,7 @@ namespace ms_word_writer
                 Row lastRow = lastTable.Rows[lastTable.Rows.Count - 1];
                 double.TryParse(lastRow.Cells[3].Paragraphs[0].Text, out double lastBackupSize);
                 lastBackupSize = Math.Round(lastBackupSize / 1024, 2);
-                contentField.Text += $"Последняя запись         №{lastRow.Cells[0].Paragraphs[0].Text}  /  {lastRow.Cells[1].Paragraphs[0].Text}  /  {lastRow.Cells[2].Paragraphs[0].Text} / {lastBackupSize}Гб\n";
+                contentField.Text += $"Последняя запись         {lastRow.Cells[0].Paragraphs[0].Text}  /  {lastRow.Cells[1].Paragraphs[0].Text}  /  {lastRow.Cells[2].Paragraphs[0].Text} / {lastBackupSize}Гб\n";
 
                 int.TryParse(lastRow.Cells[0].Paragraphs[0].Text, out lastRecordNumber);
             }

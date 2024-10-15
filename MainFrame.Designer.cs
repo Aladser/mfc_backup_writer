@@ -201,7 +201,7 @@ namespace ms_word_writer
             this.showBackupFileButton.TabIndex = 22;
             this.showBackupFileButton.Text = "Файл бэкапа";
             this.showBackupFileButton.UseVisualStyleBackColor = true;
-            this.showBackupFileButton.Click += new System.EventHandler(this.showBackupFileButton_Click);
+            this.showBackupFileButton.Click += new System.EventHandler(this.ShowBackupFileButton_Click);
             // 
             // MainForm
             // 
