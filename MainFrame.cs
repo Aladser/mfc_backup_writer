@@ -3,7 +3,6 @@ using System;
 using System.Configuration;
 using System.IO;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using Xceed.Document.NET;
 using Xceed.Words.NET;
 
@@ -11,6 +10,7 @@ namespace ms_word_writer
 {
     public partial class MainForm : Form
     {
+        string backupFilename = ConfigurationManager.AppSettings["BACKUP_FILE"];
         string filename;
         string filefolder;
         int lastRecordNumber = 0;
@@ -18,12 +18,18 @@ namespace ms_word_writer
         public MainForm()
         {
             InitializeComponent();
+
             // Поиск файла бэкпа в конфигурации
-            if (ConfigurationManager.AppSettings["BACKUP_FILE"] != "")
+            if (backupFilename != "")
             {
-                if (File.Exists(ConfigurationManager.AppSettings["BACKUP_FILE"]))
+                if (File.Exists(backupFilename))
                 {
-                    ShowBackupFileInfo(ConfigurationManager.AppSettings["BACKUP_FILE"]);
+                    var document = DocX.Load(backupFilename);
+                    if (document.Tables.Count == 0)
+                    {
+                        TableCtl.Create(document);
+                    }
+                    ShowBackupFileInfo(backupFilename);
                 }
                 else
                 {
@@ -40,7 +46,7 @@ namespace ms_word_writer
             var document = DocX.Load(openFileDialog.FileName);
             if (document.Tables.Count == 0)
             {
-                TableCtl.Create(this, openFileDialog.FileName);
+                TableCtl.Create(document);
             }
 
             Program.WriteBackupFilepath(openFileDialog.FileName);
@@ -120,7 +126,7 @@ namespace ms_word_writer
 
             try
             {
-                DocX document = TableCtl.Write(ConfigurationManager.AppSettings["BACKUP_FILE"], cellData);
+                DocX document = TableCtl.Write(backupFilename, cellData);
                 ShowTableLastRows(document);
             }
             catch (Exception exc)
@@ -151,20 +157,20 @@ namespace ms_word_writer
             else
             {
                 lastTable = document.Tables[document.Tables.Count - 1];
-                if(lastTable.RowCount < 3)
+                if (lastTable.RowCount < 3)
                 {
                     contentField.Text += "Нет записей в файле\n";
                     return;
                 }
             }
 
-            if(!isFileOpening)
+            if (!isFileOpening)
             {
                 contentField.Text += "-----------------------\n";
             }
 
             // есть минимум две записи
-            if(lastTable.RowCount > 3)
+            if (lastTable.RowCount > 3)
             {
                 Row peltRow = lastTable.Rows[lastTable.Rows.Count - 2];
                 double.TryParse(peltRow.Cells[3].Paragraphs[0].Text, out double peltBackupSize);

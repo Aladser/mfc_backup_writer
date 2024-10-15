@@ -15,9 +15,8 @@ namespace ms_word_writer.Classes
         /// <summary>
         /// Создает таблицу
         /// </summary>
-        public static Xceed.Document.NET.Table Create(Form form, string filepath)
+        public static Xceed.Document.NET.Table Create(DocX document)
         {
-            var document = DocX.Load(filepath);
             var table = document.AddTable(2, 8);
 
             // отступы ячеек
@@ -94,13 +93,13 @@ namespace ms_word_writer.Classes
         }
 
 
-            /// <summary>
-            /// Записывает данные в ячейку строки таблицы
-            /// </summary>
-            /// <param name="row"></param> Xceed.Document.NET.Row строка
-            /// <param name="cellIndex"></param> индекс ячейки
-            /// <param name="text"></param> содержание ячейки
-            private static void WriteRowCellContent(Xceed.Document.NET.Row row, int cellIndex, string text, bool isHeader = false)
+        /// <summary>
+        /// Записывает данные в ячейку строки таблицы
+        /// </summary>
+        /// <param name="row"></param> Xceed.Document.NET.Row строка
+        /// <param name="cellIndex"></param> индекс ячейки
+        /// <param name="text"></param> содержание ячейки
+        private static void WriteRowCellContent(Xceed.Document.NET.Row row, int cellIndex, string text, bool isHeader = false)
         {
             row.Cells[cellIndex].Paragraphs[0].Append(text);
 
