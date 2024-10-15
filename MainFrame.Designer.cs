@@ -49,6 +49,7 @@ namespace ms_word_writer
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.showBackupFileButton = new System.Windows.Forms.Button();
+            this.removeLastRowButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,7 +57,7 @@ namespace ms_word_writer
             // 
             this.openFileButton.Location = new System.Drawing.Point(21, 355);
             this.openFileButton.Name = "openFileButton";
-            this.openFileButton.Size = new System.Drawing.Size(106, 36);
+            this.openFileButton.Size = new System.Drawing.Size(150, 50);
             this.openFileButton.TabIndex = 1;
             this.openFileButton.Text = "Открыть";
             this.openFileButton.UseVisualStyleBackColor = true;
@@ -79,9 +80,9 @@ namespace ms_word_writer
             // writeButton
             // 
             this.writeButton.Enabled = false;
-            this.writeButton.Location = new System.Drawing.Point(148, 355);
+            this.writeButton.Location = new System.Drawing.Point(177, 355);
             this.writeButton.Name = "writeButton";
-            this.writeButton.Size = new System.Drawing.Size(99, 36);
+            this.writeButton.Size = new System.Drawing.Size(150, 50);
             this.writeButton.TabIndex = 7;
             this.writeButton.Text = "Записать";
             this.writeButton.UseVisualStyleBackColor = true;
@@ -178,7 +179,7 @@ namespace ms_word_writer
             this.contentField.Location = new System.Drawing.Point(755, 32);
             this.contentField.Name = "contentField";
             this.contentField.ReadOnly = true;
-            this.contentField.Size = new System.Drawing.Size(542, 359);
+            this.contentField.Size = new System.Drawing.Size(542, 373);
             this.contentField.TabIndex = 8;
             this.contentField.Text = "";
             // 
@@ -195,19 +196,30 @@ namespace ms_word_writer
             // showBackupFileButton
             // 
             this.showBackupFileButton.Enabled = false;
-            this.showBackupFileButton.Location = new System.Drawing.Point(270, 355);
+            this.showBackupFileButton.Location = new System.Drawing.Point(333, 355);
             this.showBackupFileButton.Name = "showBackupFileButton";
-            this.showBackupFileButton.Size = new System.Drawing.Size(136, 36);
+            this.showBackupFileButton.Size = new System.Drawing.Size(150, 50);
             this.showBackupFileButton.TabIndex = 22;
             this.showBackupFileButton.Text = "Файл бэкапа";
             this.showBackupFileButton.UseVisualStyleBackColor = true;
             this.showBackupFileButton.Click += new System.EventHandler(this.ShowBackupFileButton_Click);
             // 
+            // removeLastRowButton
+            // 
+            this.removeLastRowButton.Location = new System.Drawing.Point(489, 355);
+            this.removeLastRowButton.Name = "removeLastRowButton";
+            this.removeLastRowButton.Size = new System.Drawing.Size(150, 50);
+            this.removeLastRowButton.TabIndex = 23;
+            this.removeLastRowButton.Text = "Удалить последнюю запись";
+            this.removeLastRowButton.UseVisualStyleBackColor = true;
+            this.removeLastRowButton.Click += new System.EventHandler(this.removeLastRowButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1337, 424);
+            this.ClientSize = new System.Drawing.Size(1331, 437);
+            this.Controls.Add(this.removeLastRowButton);
             this.Controls.Add(this.showBackupFileButton);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.backupNameField);
@@ -250,6 +262,7 @@ namespace ms_word_writer
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button showBackupFileButton;
+        private System.Windows.Forms.Button removeLastRowButton;
     }
 }
 
