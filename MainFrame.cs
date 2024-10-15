@@ -10,6 +10,7 @@ namespace ms_word_writer
 {
     public partial class MainForm : Form
     {
+        string backupFilename = ConfigurationManager.AppSettings["BACKUP_FILE"];
         string filename;
         string filefolder;
         int lastRecordNumber = 0;
@@ -17,59 +18,65 @@ namespace ms_word_writer
         public MainForm()
         {
             InitializeComponent();
+
             // Поиск файла бэкпа в конфигурации
-            if (ConfigurationManager.AppSettings["BACKUP_FILE"] != "")
+            if (backupFilename != "")
             {
-                if (File.Exists(ConfigurationManager.AppSettings["BACKUP_FILE"]))
+                if (File.Exists(backupFilename))
                 {
-                    filename = Path.GetFileName(ConfigurationManager.AppSettings["BACKUP_FILE"]);
-                    filefolder = Path.GetDirectoryName(ConfigurationManager.AppSettings["BACKUP_FILE"]);
-                    var document = DocX.Load(ConfigurationManager.AppSettings["BACKUP_FILE"]);
-                    ShowBackupFile(document, true);
-                    writeButton.Enabled = true;
-                    showBackupFileButton.Enabled = true;
+                    var document = DocX.Load(backupFilename);
+                    if (document.Tables.Count == 0)
+                    {
+                        TableCtl.Create(document);
+                    }
+                    ShowBackupFileInfo(backupFilename);
                 }
                 else
                 {
-                    Program.AddBackupFilepath("");
+                    Program.WriteBackupFilepath("");
                 }
 
             }
         }
 
-        // открывает файл
         private void OpenFileButton_Click(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() != DialogResult.OK) return;
-            filename = openFileDialog.SafeFileName;
-            filefolder = Path.GetDirectoryName(openFileDialog.FileName);
-            Program.AddBackupFilepath(openFileDialog.FileName);
 
-            try
+            var document = DocX.Load(openFileDialog.FileName);
+            if (document.Tables.Count == 0)
             {
-                var document = DocX.Load(openFileDialog.FileName);
-                int tableCount = document.Tables.Count;
+                TableCtl.Create(document);
+            }
 
-                if (document.Tables.Count == 0)
-                {
-                    TableCtl.Create(this, openFileDialog.FileName);
-                    tableCount++;
-                }
-                else
-                {
-                    contentField.Text = "";
-                    ShowBackupFile(document, true);
-                    writeButton.Enabled = true;
-                    showBackupFileButton.Enabled = true;
-                }
-            }
-            catch (Exception exc)
-            {
-                contentField.Text = exc.Message;
-            }
+            Program.WriteBackupFilepath(openFileDialog.FileName);
+            ShowBackupFileInfo(openFileDialog.FileName);
         }
 
-        // записывает в таблицу
+        // Показывает информацию о бэкапе
+        private void ShowBackupFileInfo(string filepath)
+        {
+            contentField.Text = "";
+            filename = Path.GetFileName(filepath);
+            filefolder = Path.GetDirectoryName(filepath);
+            var document = DocX.Load(filepath);
+
+            int totalRowCount = 0;
+            foreach (var table in document.Tables)
+            {
+                totalRowCount += table.RowCount;
+            }
+            totalRowCount -= document.Tables.Count * 2;
+            backupNameField.Text = $"{filename}. Таблиц = {document.Tables.Count}. Записей - {totalRowCount}";
+
+            ShowTableLastRows(document, true);
+
+            writeButton.Enabled = true;
+            showBackupFileButton.Enabled = true;
+
+            lastRecordNumber = TableCtl.GetLastRecordNumber(document);
+        }
+
         private void WriteButton_Click(object sender, EventArgs e)
         {
             // получаем значение размера бэкапа
@@ -119,8 +126,9 @@ namespace ms_word_writer
 
             try
             {
-                DocX document = TableCtl.Write(ConfigurationManager.AppSettings["BACKUP_FILE"], cellData);
-                ShowBackupFile(document);
+                DocX document = DocX.Load(backupFilename);
+                TableCtl.Write(document, cellData);
+                ShowTableLastRows(document);
             }
             catch (Exception exc)
             {
@@ -128,34 +136,56 @@ namespace ms_word_writer
             }
         }
 
-        // показать файл бэкапа в проводнике
-        private void showBackupFileButton_Click(object sender, EventArgs e)
+        private void ShowBackupFileButton_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(filefolder);
         }
 
-        // показывает путь до бэкапа
-        private void ShowBackupFile(DocX document, bool isFileOpening = false)
+        /// <summary>
+        /// Выводит последние записи
+        /// </summary>
+        /// <param name="document"></param>
+        /// <param name="isFileOpening"></param>
+        private void ShowTableLastRows(DocX document, bool isFileOpening = false)
         {
-            int tableCount = document.Tables.Count;
-            Table lastTable = document.Tables[document.Tables.Count - 1];
-            Row peltRow = lastTable.Rows[lastTable.Rows.Count - 2];
-            Row lastRow = lastTable.Rows[lastTable.Rows.Count - 1];
-            int.TryParse(lastRow.Cells[0].Paragraphs[0].Text, out lastRecordNumber);
+            Table lastTable;
+            // Проверка на пустоту файла
+            if (document.Tables.Count == 0)
+            {
+                contentField.Text += "Нет записей в файле";
+                return;
+            }
+            else
+            {
+                lastTable = document.Tables[document.Tables.Count - 1];
+                if (lastTable.RowCount < 3)
+                {
+                    contentField.Text += "Нет записей в файле\n";
+                    return;
+                }
+            }
 
             if (!isFileOpening)
             {
-                contentField.Text += "-------\n";
+                contentField.Text += "-----------------------\n";
             }
 
-            double.TryParse(peltRow.Cells[3].Paragraphs[0].Text, out double peltBackupSize);
-            peltBackupSize = Math.Round(peltBackupSize / 1024, 2);
-            contentField.Text += $"Предпоследняя запись №{peltRow.Cells[0].Paragraphs[0].Text}  /  {peltRow.Cells[1].Paragraphs[0].Text}  /  {peltRow.Cells[2].Paragraphs[0].Text} / {peltBackupSize}Гб\n";
-            double.TryParse(lastRow.Cells[3].Paragraphs[0].Text, out double lastBackupSize);
-
-            lastBackupSize = Math.Round(lastBackupSize / 1024, 2);
-            contentField.Text += $"Последняя запись         №{lastRow.Cells[0].Paragraphs[0].Text}  /  {lastRow.Cells[1].Paragraphs[0].Text}  /  {lastRow.Cells[2].Paragraphs[0].Text} / {lastBackupSize}Гб\n";
-            backupNameField.Text = $"{filename}: таблиц = {tableCount}";
+            // есть минимум две записи
+            if (lastTable.RowCount > 3)
+            {
+                Row peltRow = lastTable.Rows[lastTable.Rows.Count - 2];
+                double.TryParse(peltRow.Cells[3].Paragraphs[0].Text, out double peltBackupSize);
+                peltBackupSize = Math.Round(peltBackupSize / 1024, 2);
+                contentField.Text += $"Предпоследняя запись {peltRow.Cells[0].Paragraphs[0].Text}  /  {peltRow.Cells[1].Paragraphs[0].Text}  /  {peltRow.Cells[2].Paragraphs[0].Text} / {peltBackupSize} Гб\n";
+            }
+            // есть минимум одна запись
+            if (lastTable.RowCount > 2)
+            {
+                Row lastRow = lastTable.Rows[lastTable.Rows.Count - 1];
+                double.TryParse(lastRow.Cells[3].Paragraphs[0].Text, out double lastBackupSize);
+                lastBackupSize = Math.Round(lastBackupSize / 1024, 2);
+                contentField.Text += $"Последняя запись         {lastRow.Cells[0].Paragraphs[0].Text}  /  {lastRow.Cells[1].Paragraphs[0].Text}  /  {lastRow.Cells[2].Paragraphs[0].Text} / {lastBackupSize} Гб\n";
+            }
         }
     }
 }

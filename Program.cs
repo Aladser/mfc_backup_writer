@@ -39,7 +39,7 @@ namespace ms_word_writer
         }
 
         // записывает в конфигурацию путь до файла бэкапа
-        public static void AddBackupFilepath(string filepath)
+        public static void WriteBackupFilepath(string filepath)
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             config.AppSettings.Settings["BACKUP_FILE"].Value = filepath;

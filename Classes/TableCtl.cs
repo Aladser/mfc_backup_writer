@@ -15,9 +15,8 @@ namespace ms_word_writer.Classes
         /// <summary>
         /// Создает таблицу
         /// </summary>
-        public static Xceed.Document.NET.Table Create(Form form, string filepath)
+        public static Xceed.Document.NET.Table Create(DocX document)
         {
-            var document = DocX.Load(filepath);
             var table = document.AddTable(2, 8);
 
             // отступы ячеек
@@ -55,9 +54,8 @@ namespace ms_word_writer.Classes
         /// <param name="filepath"></param>
         /// <param name="data"></param>
         /// </summary>
-        public static DocX Write(string filepath, string[] data)
+        public static void Write(DocX document, string[] data)
         {
-            var document = DocX.Load(filepath);
             var table = document.Tables[document.Tables.Count - 1];
             var row = table.InsertRow();
             for (int i = 0; i < data.Length; i++)
@@ -65,10 +63,31 @@ namespace ms_word_writer.Classes
                 WriteRowCellContent(row, i, data[i]);
             }
             document.Save();
-
-            return document;
-
         }
+
+        /// <summary>
+        /// Возвращает номер последней строки
+        /// </summary>
+        /// <param name="document"></param>
+        /// <returns></returns>
+        public static int GetLastRecordNumber(DocX document)
+        {
+            if (document.Tables.Count <= 0)
+            {
+                return -1;
+            }
+
+            Table lastTable = document.Tables[document.Tables.Count - 1];
+            if (lastTable.RowCount < 3)
+            {
+                return 0;
+            }
+
+            Row lastRow = lastTable.Rows[lastTable.RowCount - 1];
+            int.TryParse(lastRow.Cells[0].Paragraphs[0].Text, out int number);
+            return number;
+        }
+
 
         /// <summary>
         /// Записывает данные в ячейку строки таблицы
