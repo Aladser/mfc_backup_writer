@@ -67,6 +67,8 @@ namespace ms_word_writer
 
             writeButton.Enabled = true;
             showBackupFileButton.Enabled = true;
+
+            lastRecordNumber = TableCtl.GetLastRecordNumber(document);
         }
 
         private void WriteButton_Click(object sender, EventArgs e)
@@ -176,8 +178,6 @@ namespace ms_word_writer
                 double.TryParse(lastRow.Cells[3].Paragraphs[0].Text, out double lastBackupSize);
                 lastBackupSize = Math.Round(lastBackupSize / 1024, 2);
                 contentField.Text += $"Последняя запись         {lastRow.Cells[0].Paragraphs[0].Text}  /  {lastRow.Cells[1].Paragraphs[0].Text}  /  {lastRow.Cells[2].Paragraphs[0].Text} / {lastBackupSize}Гб\n";
-
-                int.TryParse(lastRow.Cells[0].Paragraphs[0].Text, out lastRecordNumber);
             }
         }
     }

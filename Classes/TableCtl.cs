@@ -71,12 +71,36 @@ namespace ms_word_writer.Classes
         }
 
         /// <summary>
-        /// Записывает данные в ячейку строки таблицы
+        /// Возвращает номер последней строки
         /// </summary>
-        /// <param name="row"></param> Xceed.Document.NET.Row строка
-        /// <param name="cellIndex"></param> индекс ячейки
-        /// <param name="text"></param> содержание ячейки
-        private static void WriteRowCellContent(Xceed.Document.NET.Row row, int cellIndex, string text, bool isHeader = false)
+        /// <param name="document"></param>
+        /// <returns></returns>
+        public static int GetLastRecordNumber(DocX document)
+        {
+            if (document.Tables.Count <= 0)
+            {
+                return -1;
+            }
+
+            Table lastTable = document.Tables[document.Tables.Count - 1];
+            if (lastTable.RowCount < 3)
+            {
+                return 0;
+            }
+
+            Row lastRow = lastTable.Rows[lastTable.RowCount - 1];
+            int.TryParse(lastRow.Cells[0].Paragraphs[0].Text, out int number);
+            return number;
+        }
+
+
+            /// <summary>
+            /// Записывает данные в ячейку строки таблицы
+            /// </summary>
+            /// <param name="row"></param> Xceed.Document.NET.Row строка
+            /// <param name="cellIndex"></param> индекс ячейки
+            /// <param name="text"></param> содержание ячейки
+            private static void WriteRowCellContent(Xceed.Document.NET.Row row, int cellIndex, string text, bool isHeader = false)
         {
             row.Cells[cellIndex].Paragraphs[0].Append(text);
 
