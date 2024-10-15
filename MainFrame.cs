@@ -25,7 +25,16 @@ namespace ms_word_writer
                     filename = Path.GetFileName(ConfigurationManager.AppSettings["BACKUP_FILE"]);
                     filefolder = Path.GetDirectoryName(ConfigurationManager.AppSettings["BACKUP_FILE"]);
                     var document = DocX.Load(ConfigurationManager.AppSettings["BACKUP_FILE"]);
-                    ShowBackupFile(document, true);
+
+                    int totalRowCount = 0;
+                    foreach(var table in document.Tables)
+                    {
+                        totalRowCount += table.RowCount;
+                    }
+                    totalRowCount -= document.Tables.Count * 2;
+                    backupNameField.Text = $"{filename}. Таблиц = {document.Tables.Count}. Записей - {totalRowCount}";
+                    ShowTableLastRows(document, true);
+
                     writeButton.Enabled = true;
                     showBackupFileButton.Enabled = true;
                 }
@@ -58,7 +67,7 @@ namespace ms_word_writer
                 else
                 {
                     contentField.Text = "";
-                    ShowBackupFile(document, true);
+                    ShowTableLastRows(document, true);
                     writeButton.Enabled = true;
                     showBackupFileButton.Enabled = true;
                 }
@@ -120,7 +129,7 @@ namespace ms_word_writer
             try
             {
                 DocX document = TableCtl.Write(ConfigurationManager.AppSettings["BACKUP_FILE"], cellData);
-                ShowBackupFile(document);
+                ShowTableLastRows(document);
             }
             catch (Exception exc)
             {
@@ -135,27 +144,48 @@ namespace ms_word_writer
         }
 
         // показывает путь до бэкапа
-        private void ShowBackupFile(DocX document, bool isFileOpening = false)
+        private void ShowTableLastRows(DocX document, bool isFileOpening = false)
         {
-            int tableCount = document.Tables.Count;
-            Table lastTable = document.Tables[document.Tables.Count - 1];
-            Row peltRow = lastTable.Rows[lastTable.Rows.Count - 2];
-            Row lastRow = lastTable.Rows[lastTable.Rows.Count - 1];
-            int.TryParse(lastRow.Cells[0].Paragraphs[0].Text, out lastRecordNumber);
-
-            if (!isFileOpening)
+            Table lastTable;
+            // Проверка на пустоту файла
+            if (document.Tables.Count == 0)
             {
-                contentField.Text += "-------\n";
+                contentField.Text += "Нет записей в файле";
+                return;
+            }
+            else
+            {
+                lastTable = document.Tables[document.Tables.Count - 1];
+                if(lastTable.RowCount < 3)
+                {
+                    contentField.Text += "Нет записей в файле\n";
+                    return;
+                }
             }
 
-            double.TryParse(peltRow.Cells[3].Paragraphs[0].Text, out double peltBackupSize);
-            peltBackupSize = Math.Round(peltBackupSize / 1024, 2);
-            contentField.Text += $"Предпоследняя запись №{peltRow.Cells[0].Paragraphs[0].Text}  /  {peltRow.Cells[1].Paragraphs[0].Text}  /  {peltRow.Cells[2].Paragraphs[0].Text} / {peltBackupSize}Гб\n";
-            double.TryParse(lastRow.Cells[3].Paragraphs[0].Text, out double lastBackupSize);
+            if(!isFileOpening)
+            {
+                contentField.Text += "-----------------------\n";
+            }
 
-            lastBackupSize = Math.Round(lastBackupSize / 1024, 2);
-            contentField.Text += $"Последняя запись         №{lastRow.Cells[0].Paragraphs[0].Text}  /  {lastRow.Cells[1].Paragraphs[0].Text}  /  {lastRow.Cells[2].Paragraphs[0].Text} / {lastBackupSize}Гб\n";
-            backupNameField.Text = $"{filename}: таблиц = {tableCount}";
+            // есть минимум две записи
+            if(lastTable.RowCount > 3)
+            {
+                Row peltRow = lastTable.Rows[lastTable.Rows.Count - 2];
+                double.TryParse(peltRow.Cells[3].Paragraphs[0].Text, out double peltBackupSize);
+                peltBackupSize = Math.Round(peltBackupSize / 1024, 2);
+                contentField.Text += $"Предпоследняя запись №{peltRow.Cells[0].Paragraphs[0].Text}  /  {peltRow.Cells[1].Paragraphs[0].Text}  /  {peltRow.Cells[2].Paragraphs[0].Text} / {peltBackupSize}Гб\n";
+            }
+            // есть минимум одна запись
+            if (lastTable.RowCount > 2)
+            {
+                Row lastRow = lastTable.Rows[lastTable.Rows.Count - 1];
+                double.TryParse(lastRow.Cells[3].Paragraphs[0].Text, out double lastBackupSize);
+                lastBackupSize = Math.Round(lastBackupSize / 1024, 2);
+                contentField.Text += $"Последняя запись         №{lastRow.Cells[0].Paragraphs[0].Text}  /  {lastRow.Cells[1].Paragraphs[0].Text}  /  {lastRow.Cells[2].Paragraphs[0].Text} / {lastBackupSize}Гб\n";
+
+                int.TryParse(lastRow.Cells[0].Paragraphs[0].Text, out lastRecordNumber);
+            }
         }
     }
 }
