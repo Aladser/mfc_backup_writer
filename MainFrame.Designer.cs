@@ -206,6 +206,7 @@ namespace ms_word_writer
             // 
             // removeLastRowButton
             // 
+            this.removeLastRowButton.Enabled = false;
             this.removeLastRowButton.Location = new System.Drawing.Point(489, 355);
             this.removeLastRowButton.Name = "removeLastRowButton";
             this.removeLastRowButton.Size = new System.Drawing.Size(150, 50);
