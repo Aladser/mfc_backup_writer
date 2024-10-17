@@ -55,7 +55,7 @@ namespace ms_word_writer
             // 
             // openFileButton
             // 
-            this.openFileButton.Location = new System.Drawing.Point(21, 355);
+            this.openFileButton.Location = new System.Drawing.Point(22, 355);
             this.openFileButton.Name = "openFileButton";
             this.openFileButton.Size = new System.Drawing.Size(150, 50);
             this.openFileButton.TabIndex = 1;
@@ -80,7 +80,7 @@ namespace ms_word_writer
             // writeButton
             // 
             this.writeButton.Enabled = false;
-            this.writeButton.Location = new System.Drawing.Point(177, 355);
+            this.writeButton.Location = new System.Drawing.Point(178, 355);
             this.writeButton.Name = "writeButton";
             this.writeButton.Size = new System.Drawing.Size(150, 50);
             this.writeButton.TabIndex = 7;
@@ -108,7 +108,7 @@ namespace ms_word_writer
             // 
             this.workerLabel.Location = new System.Drawing.Point(18, 208);
             this.workerLabel.Name = "workerLabel";
-            this.workerLabel.Size = new System.Drawing.Size(284, 38);
+            this.workerLabel.Size = new System.Drawing.Size(284, 52);
             this.workerLabel.TabIndex = 13;
             this.workerLabel.Text = "ФИО, должность лица, осуществившего резервное копирование";
             // 
@@ -136,8 +136,8 @@ namespace ms_word_writer
             this.backupContentField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.backupContentField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.backupContentField.FormattingEnabled = true;
-            this.backupContentField.Items.AddRange(Program.BACKUP_CONTENT_ARR.ToArray());
-            this.backupContentField.SelectedIndex = 0;
+            this.backupContentField.Items.AddRange(new object[] {
+            "1"});
             this.backupContentField.Location = new System.Drawing.Point(308, 93);
             this.backupContentField.Name = "backupContentField";
             this.backupContentField.Size = new System.Drawing.Size(423, 28);
@@ -148,8 +148,8 @@ namespace ms_word_writer
             this.workerField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.workerField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.workerField.FormattingEnabled = true;
-            this.workerField.Items.AddRange(Program.WORKERS_ARR.ToArray());
-            this.workerField.SelectedIndex = 0;
+            this.workerField.Items.AddRange(new object[] {
+            "1"});
             this.workerField.Location = new System.Drawing.Point(308, 208);
             this.workerField.Name = "workerField";
             this.workerField.Size = new System.Drawing.Size(423, 28);
@@ -158,7 +158,7 @@ namespace ms_word_writer
             // backupNameLabel
             // 
             this.backupNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.backupNameLabel.Location = new System.Drawing.Point(17, 284);
+            this.backupNameLabel.Location = new System.Drawing.Point(18, 283);
             this.backupNameLabel.Name = "backupNameLabel";
             this.backupNameLabel.Size = new System.Drawing.Size(284, 23);
             this.backupNameLabel.TabIndex = 19;
@@ -167,7 +167,7 @@ namespace ms_word_writer
             // backupNameField
             // 
             this.backupNameField.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.backupNameField.Location = new System.Drawing.Point(17, 307);
+            this.backupNameField.Location = new System.Drawing.Point(18, 316);
             this.backupNameField.Name = "backupNameField";
             this.backupNameField.Size = new System.Drawing.Size(714, 27);
             this.backupNameField.TabIndex = 20;
@@ -196,7 +196,7 @@ namespace ms_word_writer
             // showBackupFileButton
             // 
             this.showBackupFileButton.Enabled = false;
-            this.showBackupFileButton.Location = new System.Drawing.Point(333, 355);
+            this.showBackupFileButton.Location = new System.Drawing.Point(334, 355);
             this.showBackupFileButton.Name = "showBackupFileButton";
             this.showBackupFileButton.Size = new System.Drawing.Size(150, 50);
             this.showBackupFileButton.TabIndex = 22;
@@ -207,7 +207,7 @@ namespace ms_word_writer
             // removeLastRowButton
             // 
             this.removeLastRowButton.Enabled = false;
-            this.removeLastRowButton.Location = new System.Drawing.Point(489, 355);
+            this.removeLastRowButton.Location = new System.Drawing.Point(490, 355);
             this.removeLastRowButton.Name = "removeLastRowButton";
             this.removeLastRowButton.Size = new System.Drawing.Size(150, 50);
             this.removeLastRowButton.TabIndex = 23;
@@ -219,7 +219,7 @@ namespace ms_word_writer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1331, 437);
+            this.ClientSize = new System.Drawing.Size(1331, 440);
             this.Controls.Add(this.removeLastRowButton);
             this.Controls.Add(this.showBackupFileButton);
             this.Controls.Add(this.pictureBox1);
