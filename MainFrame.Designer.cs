@@ -50,6 +50,7 @@ namespace ms_word_writer
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.showBackupFileButton = new System.Windows.Forms.Button();
             this.removeLastRowButton = new System.Windows.Forms.Button();
+            this.clearInfoFieldBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,7 +81,7 @@ namespace ms_word_writer
             // writeButton
             // 
             this.writeButton.Enabled = false;
-            this.writeButton.Location = new System.Drawing.Point(178, 355);
+            this.writeButton.Location = new System.Drawing.Point(21, 423);
             this.writeButton.Name = "writeButton";
             this.writeButton.Size = new System.Drawing.Size(150, 50);
             this.writeButton.TabIndex = 7;
@@ -138,6 +139,11 @@ namespace ms_word_writer
             this.backupContentField.FormattingEnabled = true;
             this.backupContentField.Items.AddRange(Program.BACKUP_CONTENT_ARR.ToArray());
             this.backupContentField.SelectedIndex = 0;
+            /*
+            this.backupContentField.Items.AddRange(new object[] {
+            "1",
+            "2"});
+            */
             this.backupContentField.Location = new System.Drawing.Point(308, 93);
             this.backupContentField.Name = "backupContentField";
             this.backupContentField.Size = new System.Drawing.Size(423, 28);
@@ -150,6 +156,11 @@ namespace ms_word_writer
             this.workerField.FormattingEnabled = true;
             this.workerField.Items.AddRange(Program.WORKERS_ARR.ToArray());
             this.workerField.SelectedIndex = 0;
+            /*
+            this.workerField.Items.AddRange(new object[] {
+            "1",
+            "2"});
+            */
             this.workerField.Location = new System.Drawing.Point(308, 208);
             this.workerField.Name = "workerField";
             this.workerField.Size = new System.Drawing.Size(423, 28);
@@ -179,14 +190,14 @@ namespace ms_word_writer
             this.contentField.Location = new System.Drawing.Point(755, 32);
             this.contentField.Name = "contentField";
             this.contentField.ReadOnly = true;
-            this.contentField.Size = new System.Drawing.Size(542, 373);
+            this.contentField.Size = new System.Drawing.Size(542, 441);
             this.contentField.TabIndex = 8;
             this.contentField.Text = "";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::mfc_backup_writer.Properties.Resources.info;
-            this.pictureBox1.Location = new System.Drawing.Point(703, 370);
+            this.pictureBox1.Location = new System.Drawing.Point(704, 452);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(28, 21);
             this.pictureBox1.TabIndex = 21;
@@ -196,7 +207,7 @@ namespace ms_word_writer
             // showBackupFileButton
             // 
             this.showBackupFileButton.Enabled = false;
-            this.showBackupFileButton.Location = new System.Drawing.Point(334, 355);
+            this.showBackupFileButton.Location = new System.Drawing.Point(360, 355);
             this.showBackupFileButton.Name = "showBackupFileButton";
             this.showBackupFileButton.Size = new System.Drawing.Size(150, 50);
             this.showBackupFileButton.TabIndex = 22;
@@ -207,7 +218,7 @@ namespace ms_word_writer
             // removeLastRowButton
             // 
             this.removeLastRowButton.Enabled = false;
-            this.removeLastRowButton.Location = new System.Drawing.Point(490, 355);
+            this.removeLastRowButton.Location = new System.Drawing.Point(189, 423);
             this.removeLastRowButton.Name = "removeLastRowButton";
             this.removeLastRowButton.Size = new System.Drawing.Size(150, 50);
             this.removeLastRowButton.TabIndex = 23;
@@ -215,11 +226,22 @@ namespace ms_word_writer
             this.removeLastRowButton.UseVisualStyleBackColor = true;
             this.removeLastRowButton.Click += new System.EventHandler(this.removeLastRowButton_Click);
             // 
+            // clearInfoFieldBtn
+            // 
+            this.clearInfoFieldBtn.Location = new System.Drawing.Point(189, 355);
+            this.clearInfoFieldBtn.Name = "clearInfoFieldBtn";
+            this.clearInfoFieldBtn.Size = new System.Drawing.Size(150, 50);
+            this.clearInfoFieldBtn.TabIndex = 24;
+            this.clearInfoFieldBtn.Text = "Очистить поле";
+            this.clearInfoFieldBtn.UseVisualStyleBackColor = true;
+            this.clearInfoFieldBtn.Click += new System.EventHandler(this.clearInfoFieldBtn_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1331, 440);
+            this.ClientSize = new System.Drawing.Size(1331, 485);
+            this.Controls.Add(this.clearInfoFieldBtn);
             this.Controls.Add(this.removeLastRowButton);
             this.Controls.Add(this.showBackupFileButton);
             this.Controls.Add(this.pictureBox1);
@@ -264,6 +286,7 @@ namespace ms_word_writer
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button showBackupFileButton;
         private System.Windows.Forms.Button removeLastRowButton;
+        private System.Windows.Forms.Button clearInfoFieldBtn;
     }
 }
 

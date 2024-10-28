@@ -205,5 +205,10 @@ namespace ms_word_writer
             lastRecordNumber = TableCtl.GetLastRecordNumber(document);
             ShowTableLastRows(document);
         }
+
+        private void clearInfoFieldBtn_Click(object sender, EventArgs e)
+        {
+            contentField.Text = "";
+        }
     }
 }
