@@ -202,6 +202,7 @@ namespace ms_word_writer
             lastTable.RemoveRow();
 
             document.Save();
+            lastRecordNumber = TableCtl.GetLastRecordNumber(document);
             ShowTableLastRows(document);
         }
     }

@@ -127,13 +127,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages\Xceed.Document.NET.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages\Xceed.Words.NET.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="favicon.ico" />
+    <Content Include="packages\Xceed.Document.NET.dll" />
+    <Content Include="packages\Xceed.Words.NET.dll" />
     <None Include="info.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
